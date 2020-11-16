@@ -7,6 +7,8 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
+    - UnityEditor.Tilemaps.GridPaletteBrushes
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -56,6 +58,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -526,7 +530,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 1f03e5541226e5deb9abbc14683561ca
+      Hash: 2bbf16366737c7980f0c68c3e88f1829
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -599,4 +603,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0005.apk
+  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0011.apk

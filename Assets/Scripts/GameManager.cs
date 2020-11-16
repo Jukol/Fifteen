@@ -16,9 +16,21 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject timer;
 
+    [SerializeField]
+    AudioClip woodSlide;
+
     int hours, minutes, seconds, tenthsOfASecond;
     float startTime;
     bool startTimer;
+    bool startButtonPressed;
+
+    public bool StartButtonPressed
+    {
+        get
+        {
+            return startButtonPressed;
+        }
+    }
 
 
     private void Start()
@@ -64,6 +76,7 @@ public class GameManager : MonoBehaviour
         winText.gameObject.SetActive(false);
         startTime = Time.time;
         startTimer = true;
+        startButtonPressed = true;
     }
 
     public void CheckForWin()
@@ -86,6 +99,7 @@ public class GameManager : MonoBehaviour
         {
             startTimer = false;
             winText.gameObject.SetActive(true);
+            startButtonPressed = false;
         }
     }
 
@@ -124,6 +138,16 @@ public class GameManager : MonoBehaviour
             tenthsOfASecondText.text = "0" + tenthsOfASecond.ToString();
         else
             tenthsOfASecondText.text = tenthsOfASecond.ToString();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void PlaySound()
+    {
+        AudioSource.PlayClipAtPoint(woodSlide, Camera.main.transform.position, 1f);
     }
 
 }
