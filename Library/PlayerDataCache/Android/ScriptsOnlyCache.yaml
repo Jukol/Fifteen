@@ -20,8 +20,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -58,6 +60,8 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
@@ -134,7 +138,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 7fcd834cd7eea57ce1e5898dc4e428c3
+      Hash: 22147bb7894b308a4d7b5e93c05a88cd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Piece
@@ -530,7 +534,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 2bbf16366737c7980f0c68c3e88f1829
+      Hash: b27a823438a1cbbaacd715b5347658bc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -603,4 +607,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0011.apk
+  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0021.apk

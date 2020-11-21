@@ -6,36 +6,33 @@ using UnityEngine.EventSystems;
 public class Piece : MonoBehaviour, IPointerDownHandler
 {
 
-    Vector3 newPosition;
-    Vector3 newPosition2;
-    Vector3 newPosition3;
-    RaycastHit hitInfo;
-    RaycastHit hitInfo2;
-    RaycastHit hitInfo3;
-    [SerializeField]
+    Vector3 newPosition, newPosition2, newPosition3;
+    RaycastHit hitInfo, hitInfo2, hitInfo3;
     GameObject pieceUp, pieceRight, pieceDown, pieceLeft, pieceUpUp, pieceRightRight, pieceDownDown, pieceLeftLeft;
     [SerializeField]
     GameManager gm;
     bool canPlayAudio = true;
     bool canMove;
-    [SerializeField]
     bool tryMovingInThrees;
     public bool CanMove { get; set; }
+    [SerializeField]
+    float speed = 20f;
+    WaitForSeconds soundDelay = new WaitForSeconds(0.12f);
+
 
     private void FixedUpdate()
     {
-
-        if (canMove && gm.StartButtonPressed)
+        if (canMove && gm.ShuffleButtonPressed)
         {
             if (canPlayAudio && canMove)
-                gm.PlaySound();
+                StartCoroutine(SoundWithDelay());
 
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, 20f);
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, speed);
             
             //FOR DOUBLE MOVES
             if (pieceUp != null)
             {
-                pieceUp.transform.position = Vector3.MoveTowards(pieceUp.transform.position, newPosition2, 20f);
+                pieceUp.transform.position = Vector3.MoveTowards(pieceUp.transform.position, newPosition2, speed);
                 if (pieceUp.transform.position == newPosition2)
                 {
                     pieceUp = null;
@@ -44,7 +41,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceRight != null)
             {
-                pieceRight.transform.position = Vector3.MoveTowards(pieceRight.transform.position, newPosition2, 20f);
+                pieceRight.transform.position = Vector3.MoveTowards(pieceRight.transform.position, newPosition2, speed);
                 if (pieceRight.transform.position == newPosition2)
                 {
                     pieceRight = null;
@@ -53,7 +50,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceDown != null)
             {
-                pieceDown.transform.position = Vector3.MoveTowards(pieceDown.transform.position, newPosition2, 20f);
+                pieceDown.transform.position = Vector3.MoveTowards(pieceDown.transform.position, newPosition2, speed);
                 if (pieceDown.transform.position == newPosition2)
                 {
                     pieceDown = null;
@@ -62,7 +59,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceLeft != null)
             {
-                pieceLeft.transform.position = Vector3.MoveTowards(pieceLeft.transform.position, newPosition2, 20f);
+                pieceLeft.transform.position = Vector3.MoveTowards(pieceLeft.transform.position, newPosition2, speed);
                 if (pieceLeft.transform.position == newPosition2)
                 {
                     pieceLeft = null;
@@ -73,7 +70,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             //FOR TRIPLE MOVES
             if (pieceUpUp != null)
             {
-                pieceUpUp.transform.position = Vector3.MoveTowards(pieceUpUp.transform.position, newPosition3, 20f);
+                pieceUpUp.transform.position = Vector3.MoveTowards(pieceUpUp.transform.position, newPosition3, speed);
                 if (pieceUpUp.transform.position == newPosition3)
                 {
                     pieceUpUp = null;
@@ -82,7 +79,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceRightRight != null)
             {
-                pieceRightRight.transform.position = Vector3.MoveTowards(pieceRightRight.transform.position, newPosition3, 20f);
+                pieceRightRight.transform.position = Vector3.MoveTowards(pieceRightRight.transform.position, newPosition3, speed);
                 if (pieceRightRight.transform.position == newPosition3)
                 {
                     pieceRightRight = null;
@@ -91,7 +88,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceDownDown != null)
             {
-                pieceDownDown.transform.position = Vector3.MoveTowards(pieceDownDown.transform.position, newPosition3, 20f);
+                pieceDownDown.transform.position = Vector3.MoveTowards(pieceDownDown.transform.position, newPosition3, speed);
                 if (pieceDownDown.transform.position == newPosition3)
                 {
                     pieceDownDown = null;
@@ -100,7 +97,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
             if (pieceLeftLeft != null)
             {
-                pieceLeftLeft.transform.position = Vector3.MoveTowards(pieceLeftLeft.transform.position, newPosition3, 20f);
+                pieceLeftLeft.transform.position = Vector3.MoveTowards(pieceLeftLeft.transform.position, newPosition3, speed);
                 if (pieceLeftLeft.transform.position == newPosition3)
                 {
                     pieceLeftLeft = null;
@@ -109,8 +106,12 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             //FOR TRIPLE MOVES
 
             canPlayAudio = false;
-            if (transform.position == newPosition) { }
-            gm.CheckForWin();
+            if (transform.position == newPosition)
+            {
+                gm.CheckForWin();
+                gm.Moves++;
+            }
+            
         }
 
         if (transform.position == newPosition)
@@ -146,29 +147,28 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
     void MoveInOnes()
     {
-        if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.StartButtonPressed)
+        if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             canMove = true;
         }
-        else if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.StartButtonPressed)
+        else if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             canMove = true;
         }
-        else if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.StartButtonPressed)
+        else if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             canMove = true;
         }
-        else if (Physics.Raycast(transform.position, Vector3.left, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.StartButtonPressed)
+        else if (Physics.Raycast(transform.position, Vector3.left, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             canMove = true;
         }
         else
         {
-            //newPosition = transform.position;
             canMove = false;
         }
     }
@@ -177,7 +177,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
     {
         if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
-            Physics.Raycast(hitInfo.collider.transform.position, Vector3.up, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.StartButtonPressed)
+            Physics.Raycast(hitInfo.collider.transform.position, Vector3.up, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -186,7 +186,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
         }
         else if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
-            Physics.Raycast(hitInfo.collider.transform.position, Vector3.right, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.StartButtonPressed)
+            Physics.Raycast(hitInfo.collider.transform.position, Vector3.right, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -196,7 +196,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
         else if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
-            Physics.Raycast(hitInfo.collider.transform.position, Vector3.down, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.StartButtonPressed)
+            Physics.Raycast(hitInfo.collider.transform.position, Vector3.down, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -206,7 +206,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
 
         else if (Physics.Raycast(transform.position, Vector3.left, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
-            Physics.Raycast(hitInfo.collider.transform.position, Vector3.left, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.StartButtonPressed)
+            Physics.Raycast(hitInfo.collider.transform.position, Vector3.left, out hitInfo2, 150f) && hitInfo2.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -227,7 +227,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             hitInfo.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo.collider.transform.position, Vector3.up, out hitInfo2, 150f) && hitInfo2.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo2.collider.transform.position, Vector3.up, out hitInfo3, 150f) && hitInfo3.collider.tag == "Cell" && 
-            gm.StartButtonPressed)
+            gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -240,7 +240,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             hitInfo.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo.collider.transform.position, Vector3.right, out hitInfo2, 150f) && hitInfo2.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo2.collider.transform.position, Vector3.right, out hitInfo3, 150f) && hitInfo3.collider.tag == "Cell" &&
-            gm.StartButtonPressed)
+            gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -254,7 +254,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             hitInfo.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo.collider.transform.position, Vector3.down, out hitInfo2, 150f) && hitInfo2.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo2.collider.transform.position, Vector3.down, out hitInfo3, 150f) && hitInfo3.collider.tag == "Cell" &&
-            gm.StartButtonPressed)
+            gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -268,7 +268,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             hitInfo.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo.collider.transform.position, Vector3.left, out hitInfo2, 150f) && hitInfo2.collider.tag == "Piece" &&
             Physics.Raycast(hitInfo2.collider.transform.position, Vector3.left, out hitInfo3, 150f) && hitInfo3.collider.tag == "Cell" &&
-            gm.StartButtonPressed)
+            gm.ShuffleButtonPressed)
         {
             newPosition = hitInfo.collider.transform.position;
             newPosition2 = hitInfo2.collider.transform.position;
@@ -277,5 +277,11 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             pieceLeftLeft = hitInfo2.collider.gameObject;
             canMove = true;
         }
+    }
+
+    IEnumerator SoundWithDelay()
+    {
+        yield return soundDelay;
+        gm.PlaySound();
     }
 }
