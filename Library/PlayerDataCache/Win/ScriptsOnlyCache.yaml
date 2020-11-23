@@ -1,0 +1,1588 @@
+ScriptsOnlyBuild:
+  usedScripts:
+    Assembly-CSharp.dll:
+    - GameManager
+    - Michsky.UI.ModernUIPack.AnimatedIconHandler
+    - Michsky.UI.ModernUIPack.ButtonManager
+    - Michsky.UI.ModernUIPack.ButtonManagerBasic
+    - Michsky.UI.ModernUIPack.ButtonManagerBasicIcon
+    - Michsky.UI.ModernUIPack.ButtonManagerBasicWithIcon
+    - Michsky.UI.ModernUIPack.ButtonManagerIcon
+    - Michsky.UI.ModernUIPack.ButtonManagerWithIcon
+    - Michsky.UI.ModernUIPack.ContextMenuManager
+    - Michsky.UI.ModernUIPack.CustomDropdown
+    - Michsky.UI.ModernUIPack.CustomInputField
+    - Michsky.UI.ModernUIPack.DropdownMultiSelect
+    - Michsky.UI.ModernUIPack.HorizontalSelector
+    - Michsky.UI.ModernUIPack.ModalWindowManager
+    - Michsky.UI.ModernUIPack.NotificationManager
+    - Michsky.UI.ModernUIPack.PBFilled
+    - Michsky.UI.ModernUIPack.ProgressBar
+    - Michsky.UI.ModernUIPack.RadialSlider
+    - Michsky.UI.ModernUIPack.RangeMaxSlider
+    - Michsky.UI.ModernUIPack.RangeMinSlider
+    - Michsky.UI.ModernUIPack.RangeSlider
+    - Michsky.UI.ModernUIPack.SliderManager
+    - Michsky.UI.ModernUIPack.SwitchManager
+    - Michsky.UI.ModernUIPack.ToggleAnim
+    - Michsky.UI.ModernUIPack.TooltipManager
+    - Michsky.UI.ModernUIPack.UIManager
+    - Michsky.UI.ModernUIPack.UIManagerAnimatedIcon
+    - Michsky.UI.ModernUIPack.UIManagerButton
+    - Michsky.UI.ModernUIPack.UIManagerContextMenu
+    - Michsky.UI.ModernUIPack.UIManagerDropdown
+    - Michsky.UI.ModernUIPack.UIManagerHSelector
+    - Michsky.UI.ModernUIPack.UIManagerInputField
+    - Michsky.UI.ModernUIPack.UIManagerModalWindow
+    - Michsky.UI.ModernUIPack.UIManagerNotification
+    - Michsky.UI.ModernUIPack.UIManagerProgressBar
+    - Michsky.UI.ModernUIPack.UIManagerProgressBarLoop
+    - Michsky.UI.ModernUIPack.UIManagerScrollbar
+    - Michsky.UI.ModernUIPack.UIManagerSlider
+    - Michsky.UI.ModernUIPack.UIManagerSwitch
+    - Michsky.UI.ModernUIPack.UIManagerToggle
+    - Michsky.UI.ModernUIPack.UIManagerTooltip
+    - Michsky.UI.ModernUIPack.WindowDragger
+    - Michsky.UI.ModernUIPack.WindowManager
+    - Michsky.UI.ModernUIPack.WindowManagerButton
+    - Piece
+    - SettingsPanel
+    - UnityEngine.UI.Michsky.UI.ModernUIPack.UIGradient
+    Unity.RenderPipelines.Core.Runtime.dll:
+    - UnityEngine.Rendering.UI.DebugUIHandlerBitField
+    - UnityEngine.Rendering.UI.DebugUIHandlerButton
+    - UnityEngine.Rendering.UI.DebugUIHandlerCanvas
+    - UnityEngine.Rendering.UI.DebugUIHandlerColor
+    - UnityEngine.Rendering.UI.DebugUIHandlerContainer
+    - UnityEngine.Rendering.UI.DebugUIHandlerEnumField
+    - UnityEngine.Rendering.UI.DebugUIHandlerEnumHistory
+    - UnityEngine.Rendering.UI.DebugUIHandlerFloatField
+    - UnityEngine.Rendering.UI.DebugUIHandlerFoldout
+    - UnityEngine.Rendering.UI.DebugUIHandlerGroup
+    - UnityEngine.Rendering.UI.DebugUIHandlerHBox
+    - UnityEngine.Rendering.UI.DebugUIHandlerIndirectFloatField
+    - UnityEngine.Rendering.UI.DebugUIHandlerIndirectToggle
+    - UnityEngine.Rendering.UI.DebugUIHandlerIntField
+    - UnityEngine.Rendering.UI.DebugUIHandlerPanel
+    - UnityEngine.Rendering.UI.DebugUIHandlerPersistentCanvas
+    - UnityEngine.Rendering.UI.DebugUIHandlerToggle
+    - UnityEngine.Rendering.UI.DebugUIHandlerToggleHistory
+    - UnityEngine.Rendering.UI.DebugUIHandlerUIntField
+    - UnityEngine.Rendering.UI.DebugUIHandlerVBox
+    - UnityEngine.Rendering.UI.DebugUIHandlerValue
+    - UnityEngine.Rendering.UI.DebugUIHandlerVector2
+    - UnityEngine.Rendering.UI.DebugUIHandlerVector3
+    - UnityEngine.Rendering.UI.DebugUIHandlerVector4
+    - UnityEngine.Rendering.UI.UIFoldout
+    Unity.RenderPipelines.Universal.Editor.dll:
+    - UnityEditor.Rendering.Universal.UniversalProjectSettings
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TMP_SubMeshUI
+    - TMPro.TextMeshProUGUI
+    Unity.Timeline.Editor.dll:
+    - TimelinePreferences
+    - UnityEditor.Timeline.SequenceHierarchy
+    - UnityEditor.Timeline.TimelineWindow
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.HorizontalLayoutGroup
+    - UnityEngine.UI.Image
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.Slider
+    - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
+    - UnityEngine.UI.ToggleGroup
+    - UnityEngine.UI.VerticalLayoutGroup
+  sceneClasses:
+    Assets/Scenes/SampleScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 726}
+    - Class: 114
+      Script: {instanceID: 11930}
+    - Class: 114
+      Script: {instanceID: 11932}
+    - Class: 114
+      Script: {instanceID: 11934}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11938}
+    - Class: 114
+      Script: {instanceID: 11940}
+    - Class: 114
+      Script: {instanceID: 11942}
+    - Class: 114
+      Script: {instanceID: 11944}
+    - Class: 114
+      Script: {instanceID: 11946}
+    - Class: 114
+      Script: {instanceID: 11948}
+    - Class: 114
+      Script: {instanceID: 11950}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 11954}
+    - Class: 114
+      Script: {instanceID: 11956}
+    - Class: 114
+      Script: {instanceID: 11958}
+    - Class: 114
+      Script: {instanceID: 12018}
+    - Class: 114
+      Script: {instanceID: 12040}
+    - Class: 114
+      Script: {instanceID: 12092}
+    - Class: 114
+      Script: {instanceID: 12102}
+    - Class: 114
+      Script: {instanceID: 12104}
+    - Class: 114
+      Script: {instanceID: 12154}
+    - Class: 114
+      Script: {instanceID: 12166}
+    - Class: 114
+      Script: {instanceID: 12168}
+    - Class: 114
+      Script: {instanceID: 12204}
+    - Class: 114
+      Script: {instanceID: 12224}
+    - Class: 114
+      Script: {instanceID: 12264}
+    - Class: 114
+      Script: {instanceID: 12306}
+    - Class: 114
+      Script: {instanceID: 12410}
+    - Class: 114
+      Script: {instanceID: 12412}
+    - Class: 114
+      Script: {instanceID: 12450}
+    - Class: 114
+      Script: {instanceID: 12522}
+    - Class: 114
+      Script: {instanceID: 12554}
+    - Class: 114
+      Script: {instanceID: 12574}
+    - Class: 114
+      Script: {instanceID: 12608}
+    - Class: 114
+      Script: {instanceID: 12612}
+    - Class: 114
+      Script: {instanceID: 12756}
+    - Class: 114
+      Script: {instanceID: 12822}
+    - Class: 114
+      Script: {instanceID: 12914}
+    - Class: 114
+      Script: {instanceID: 12932}
+    - Class: 114
+      Script: {instanceID: 13094}
+    - Class: 114
+      Script: {instanceID: 13096}
+    - Class: 114
+      Script: {instanceID: 13142}
+    - Class: 114
+      Script: {instanceID: 13168}
+    - Class: 114
+      Script: {instanceID: 13212}
+    - Class: 114
+      Script: {instanceID: 13222}
+    - Class: 114
+      Script: {instanceID: 13296}
+    - Class: 114
+      Script: {instanceID: 13336}
+    - Class: 114
+      Script: {instanceID: 13378}
+    - Class: 114
+      Script: {instanceID: 13422}
+    - Class: 114
+      Script: {instanceID: 13434}
+    - Class: 114
+      Script: {instanceID: 13504}
+    - Class: 114
+      Script: {instanceID: 13512}
+    - Class: 114
+      Script: {instanceID: 13542}
+    - Class: 114
+      Script: {instanceID: 13578}
+    - Class: 114
+      Script: {instanceID: 13580}
+    - Class: 114
+      Script: {instanceID: 13632}
+    - Class: 114
+      Script: {instanceID: 13636}
+    - Class: 114
+      Script: {instanceID: 13802}
+    - Class: 114
+      Script: {instanceID: 13840}
+    - Class: 114
+      Script: {instanceID: 13864}
+    - Class: 114
+      Script: {instanceID: 13922}
+    - Class: 114
+      Script: {instanceID: 13958}
+    - Class: 114
+      Script: {instanceID: 14040}
+    - Class: 114
+      Script: {instanceID: 14056}
+    - Class: 114
+      Script: {instanceID: 14108}
+    - Class: 114
+      Script: {instanceID: 14122}
+    - Class: 114
+      Script: {instanceID: 14128}
+    - Class: 114
+      Script: {instanceID: 14196}
+    - Class: 114
+      Script: {instanceID: 14230}
+    - Class: 114
+      Script: {instanceID: 14264}
+    - Class: 114
+      Script: {instanceID: 14270}
+    - Class: 114
+      Script: {instanceID: 14310}
+    - Class: 114
+      Script: {instanceID: 14312}
+    - Class: 114
+      Script: {instanceID: 14336}
+    - Class: 114
+      Script: {instanceID: 14360}
+    - Class: 114
+      Script: {instanceID: 14452}
+    - Class: 114
+      Script: {instanceID: 14456}
+    - Class: 114
+      Script: {instanceID: 14546}
+    - Class: 114
+      Script: {instanceID: 14612}
+    - Class: 114
+      Script: {instanceID: 14650}
+    - Class: 114
+      Script: {instanceID: 14714}
+    - Class: 114
+      Script: {instanceID: 14842}
+    - Class: 114
+      Script: {instanceID: 14888}
+    - Class: 114
+      Script: {instanceID: 14986}
+    - Class: 114
+      Script: {instanceID: 15014}
+    - Class: 114
+      Script: {instanceID: 15050}
+    - Class: 114
+      Script: {instanceID: 15114}
+    - Class: 114
+      Script: {instanceID: 15144}
+    - Class: 114
+      Script: {instanceID: 15170}
+    - Class: 114
+      Script: {instanceID: 15180}
+    - Class: 114
+      Script: {instanceID: 15226}
+    - Class: 114
+      Script: {instanceID: 15228}
+    - Class: 114
+      Script: {instanceID: 15256}
+    - Class: 114
+      Script: {instanceID: 15274}
+    - Class: 114
+      Script: {instanceID: 15350}
+    - Class: 114
+      Script: {instanceID: 15386}
+    - Class: 114
+      Script: {instanceID: 15394}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+  scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: f087c23fbfa15475a0d110af46fb0496
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 0ffaf073d4b1fa4e8036cf7ad52ddba7
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Toggle
+  - hash:
+      serializedVersion: 2
+      Hash: aba7b2852ef61d175dd9602e7723d5e5
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Mask
+  - hash:
+      serializedVersion: 2
+      Hash: 0c05f2bfb402def3f0a85a62a2323c7f
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Slider
+  - hash:
+      serializedVersion: 2
+      Hash: 134322c9293c1896357cce271b819ce4
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: EventTrigger
+  - hash:
+      serializedVersion: 2
+      Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ContentSizeFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 0fd6822f6177297bd0eb4d83cc7a9030
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ToggleGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 3164bc883ff663a5cdb32d1ef7e7c0c5
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: a6e561615949734e9f12f9b61661f43e
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: ae83e830e7a90c0aff918c4c2e520825
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GraphicRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: 3164bc883ff663a5cdb32d1ef7e7c0c5
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: HorizontalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 699619b86d9359741a4f58540298c80b
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Text
+  - hash:
+      serializedVersion: 2
+      Hash: fd8b23ad3c9e81bc85b197495bc510ac
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Scrollbar
+  - hash:
+      serializedVersion: 2
+      Hash: cc4274b586df3c02688bac01b88bd16c
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: EventSystem
+  - hash:
+      serializedVersion: 2
+      Hash: 4bc4346a71a8df53a6b106f68ef3a190
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ContextMenuManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Cell
+  - hash:
+      serializedVersion: 2
+      Hash: f40fedccd4adbc76605bea6d67537e4b
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: cb4ed16af1fefd2be2571cd382fb6dd1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerContextMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerProgressBarLoopEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 20af7e083414a32304174f69af002363
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerButton
+  - hash:
+      serializedVersion: 2
+      Hash: e87e4a4b53652e3121c1de39d982a768
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: LaunchURL
+  - hash:
+      serializedVersion: 2
+      Hash: 8c328a0ffa03c1bcb9332bb39f4f8453
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: Volume
+  - hash:
+      serializedVersion: 2
+      Hash: 87ff43d2baf3385cba327d8f803a4ebb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: AudioPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 4298152c7490141086c39d1836a5a43a
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: NotificationManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 0b760eb7c486d4d51766862c26cc01ef
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerTooltip
+  - hash:
+      serializedVersion: 2
+      Hash: b7d58df3c6d92c60e3611c0a808aa0dc
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerBitField
+  - hash:
+      serializedVersion: 2
+      Hash: daca3e1faa7dbd4aa5e880bbc8138021
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: WindowManagerButton
+  - hash:
+      serializedVersion: 2
+      Hash: 22147bb7894b308a4d7b5e93c05a88cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Piece
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: RadialSliderEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 3f9390ee5f5589cb5f5cecad9b8d4d7d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ProgressBar
+  - hash:
+      serializedVersion: 2
+      Hash: d53a0f2640b8100ffb4404334930d028
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerHSelector
+  - hash:
+      serializedVersion: 2
+      Hash: e7a73f5f78ba6445195ec23b74a1ce2d
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 9ac327467393cb6c8045a2fd90ff67e2
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerPersistentCanvas
+  - hash:
+      serializedVersion: 2
+      Hash: 1f0602e7bad1e0a9cba31ce292eee8bb
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerVBox
+  - hash:
+      serializedVersion: 2
+      Hash: c3d3430df9e3ea95e3e3d587961390fb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 5fcd6c83f4b9ef27fbcf701cc39abb93
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: Bloom
+  - hash:
+      serializedVersion: 2
+      Hash: 5780b7db7953b5af3ef5959f8bef670c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: CustomDropdown
+  - hash:
+      serializedVersion: 2
+      Hash: a5781dc71a671b1ad2b38de19f24b71f
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: ActivationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ce6822cd5385791d314d3d4784f4be95
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: Renderer2DData
+  - hash:
+      serializedVersion: 2
+      Hash: b9f6fc307bf8c57490d5a924365ea244
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 48982140c520cbca517d0f96b60a0ba9
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: PostProcessData
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: PositionAsUV1
+  - hash:
+      serializedVersion: 2
+      Hash: abf1930d8126d0b2e00e9449129a0190
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: TouchInputModule
+  - hash:
+      serializedVersion: 2
+      Hash: 95e6797232b7d5831c9feb55a8582905
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: SplitToning
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: DropdownMultiSelectEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 7dbf450932234158be58ca2027563dcb
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerVector3
+  - hash:
+      serializedVersion: 2
+      Hash: 5f206dd3b0d6b103c9456019be49d644
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 300c75e8903f0b8f61e4a82d9047c621
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: TooltipManager
+  - hash:
+      serializedVersion: 2
+      Hash: 7ab0e790220bdca831fdd886b339039d
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GridLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 54d8f12780f7f6df9b0603e66c9a5b3b
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ColorCurves
+  - hash:
+      serializedVersion: 2
+      Hash: a852408a86aa373da4d3320c482b2947
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerProgressBar
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: SignalAsset
+  - hash:
+      serializedVersion: 2
+      Hash: b5c65c38c99828bd010cafd9b195039f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: DropdownMultiSelect
+  - hash:
+      serializedVersion: 2
+      Hash: 0dbc3be398b4869a5c8d0d8481ee402c
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: LayoutElement
+  - hash:
+      serializedVersion: 2
+      Hash: 18c222bef9ae745ce69ddde9b74337ca
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: PhysicsRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: 54832baa6e6e6a922c7b793306b00d03
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: HorizontalSelector
+  - hash:
+      serializedVersion: 2
+      Hash: 7ab46fb06ef0673bee82c783ea6dd285
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerNotification
+  - hash:
+      serializedVersion: 2
+      Hash: bd3cf68c8964d3c66d1c43f4f98508c9
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: AnimationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: cf9f5cf2c3145a37ac07f00e50e460f9
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: AspectRatioFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 91c66736e3507bbd3c15a9b02abea21b
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: LensDistortion
+  - hash:
+      serializedVersion: 2
+      Hash: 7d1a3e12579b7bd0f94909057ffba8d0
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: CameraSwitcher
+  - hash:
+      serializedVersion: 2
+      Hash: bdb2aa563ff34cd96dfe8e46b3382012
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ChromaticAberration
+  - hash:
+      serializedVersion: 2
+      Hash: ef5c43f921427d03730f6ea4c848f07d
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: RectMask2D
+  - hash:
+      serializedVersion: 2
+      Hash: 6980e81ddc615a861309d2d659cc3760
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_SubMeshUI
+  - hash:
+      serializedVersion: 2
+      Hash: 5ab533713adae59372fb3e10a585c186
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 11166a99e9815d4731ff1860e06167a0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerWithIcon
+  - hash:
+      serializedVersion: 2
+      Hash: eb229c6d50b852c329bee0df4153ef20
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ForwardRendererData
+  - hash:
+      serializedVersion: 2
+      Hash: 54c1546a8a89afb96c4196f53ff5f16c
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: UniversalAdditionalCameraData
+  - hash:
+      serializedVersion: 2
+      Hash: caa533b001ae39b864ba8425019e2268
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Shadow
+  - hash:
+      serializedVersion: 2
+      Hash: 9a8c7c4c2690c22430ee3de8388b0fb9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasicWithIcon
+  - hash:
+      serializedVersion: 2
+      Hash: c7ea1a755076c0e197bac0f92494edd0
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: UIFoldout
+  - hash:
+      serializedVersion: 2
+      Hash: 0fb27be807aa299702f28ad0bcad1f46
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: ControlPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 8b81ec5e0efee7ab2c4c9a998a7569c3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: Ripple
+  - hash:
+      serializedVersion: 2
+      Hash: 1ee6aac3c4bf95ffd794de4ef0a7aec7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasicIcon
+  - hash:
+      serializedVersion: 2
+      Hash: 5cc439bf63c0539d39588e69465ac2ab
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_SpriteAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasicEditor
+  - hash:
+      serializedVersion: 2
+      Hash: c3d3430df9e3ea95e3e3d587961390fb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: ControlTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 8dc90e648ac06f43bdd31ac9fa8f4579
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 5e1eefcd5106de6c2e85908a3b2d3f04
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerToggle
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ModalWindowManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 9d3997386a4718b31c802c7b5ba9bf1b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerSlider
+  - hash:
+      serializedVersion: 2
+      Hash: dbeab19c836bd50c0a0e371615445b64
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: FilmGrain
+  - hash:
+      serializedVersion: 2
+      Hash: 48065ce3dbe07a066dbc8f020ccbb6e8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerScrollbar
+  - hash:
+      serializedVersion: 2
+      Hash: e2caa8ec0431f4b8c6e9a2c73eee4251
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: RangeMaxSlider
+  - hash:
+      serializedVersion: 2
+      Hash: d64844960c06c8cc2bb12e45b017a5c9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: DemoListShadow
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: CustomDropdownEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 2cb85097bd451bae61ff71e703256582
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: UniversalRenderPipelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 8824e2ae622413c9997cbbb1a573e80a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: UnityEngine.UI.Michsky.UI.ModernUIPack
+    className: UIGradient
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 5e1eefcd5106de6c2e85908a3b2d3f04
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerIndirectToggle
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerWithIconEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 51b05e403ce1da1805851f42af02f4bb
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 692d6bef9ae10d87a1b64c07cbe0dc58
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerToggle
+  - hash:
+      serializedVersion: 2
+      Hash: 040dd48e3a027d5424519a5fa2009df4
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerButtonEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: DebugUpdater
+  - hash:
+      serializedVersion: 2
+      Hash: c3d3430df9e3ea95e3e3d587961390fb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 336bae4990c119bf8963316a8660e6ad
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManager
+  - hash:
+      serializedVersion: 2
+      Hash: d15e259c364b712d6a8749fb44cb4f30
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: CustomInputField
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: SwitchManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 5e1eefcd5106de6c2e85908a3b2d3f04
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerToggleHistory
+  - hash:
+      serializedVersion: 2
+      Hash: e15a7dc0c399e994ed774d7a59ddabab
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: RangeSlider
+  - hash:
+      serializedVersion: 2
+      Hash: ae3ed571d15438d73f249b9019eee589
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: SwitchManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: fb237a12fc73c1509df198d390ee6401
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ContextMenuManager
+  - hash:
+      serializedVersion: 2
+      Hash: ef2715046c3edf6ebd87825ee543bc85
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: WindowManager
+  - hash:
+      serializedVersion: 2
+      Hash: cee47710350b74dadea6e993236075b4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: TooltipContent
+  - hash:
+      serializedVersion: 2
+      Hash: 4fd8bf02e3089425d3502e26c44ba31a
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 4d51d5ccf37d2089bdfe827617b784ff
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: VolumeProfile
+  - hash:
+      serializedVersion: 2
+      Hash: 0c9920fb850aff7b5ec756815b7a6fc1
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ChannelMixer
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerEnumField
+  - hash:
+      serializedVersion: 2
+      Hash: c1d728126ff1918728036c59106d32b2
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 841f439a20b4a381d5a0c5ec9e36deda
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ColorLookup
+  - hash:
+      serializedVersion: 2
+      Hash: 6555b31c25cb4f19eb3fb2a8ce0ea0dc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: RangeMinSlider
+  - hash:
+      serializedVersion: 2
+      Hash: 1f0602e7bad1e0a9cba31ce292eee8bb
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerWidget
+  - hash:
+      serializedVersion: 2
+      Hash: 063e5238d65060f6ac28f6158bab3397
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: PBFilled
+  - hash:
+      serializedVersion: 2
+      Hash: f050e4ebd311386367bb1906f9218b01
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: UniversalAdditionalLightData
+  - hash:
+      serializedVersion: 2
+      Hash: 0c0fc931324e8f4d770c367a3fb22878
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerProgressBarLoop
+  - hash:
+      serializedVersion: 2
+      Hash: a9fcdcb155d0f77b4f53b82879ced522
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: NotificationStacking
+  - hash:
+      serializedVersion: 2
+      Hash: 8bece1d5dedaa6be3dd7eab54f56caf6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: WindowDragger
+  - hash:
+      serializedVersion: 2
+      Hash: 67a99c72bf51722a004979b57db87178
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: MotionBlur
+  - hash:
+      serializedVersion: 2
+      Hash: be0af4b142f25976c86938456009673d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerDropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 36025d42bf23fda83a55bf1429201821
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerFoldout
+  - hash:
+      serializedVersion: 2
+      Hash: f7bb6096199e0cf058d5d69878184cf4
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 908b3077da284d11de0450423ca1808e
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: SignalReceiver
+  - hash:
+      serializedVersion: 2
+      Hash: 7abdf6195e530455923d81f2f009ab0f
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_FontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: f79e983672d079ff24eee15484fb74b8
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerColor
+  - hash:
+      serializedVersion: 2
+      Hash: 87ad3705a58f19c47136728d4a6e9c47
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_Settings
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: ActivationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 18c222bef9ae745ce69ddde9b74337ca
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: Physics2DRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerIconEditor
+  - hash:
+      serializedVersion: 2
+      Hash: a14baf2a1cb11782e81a65254c08e1a2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: AnimatedIconHandler
+  - hash:
+      serializedVersion: 2
+      Hash: a64b8ff703a69f3352c424e9d0bc1c49
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: VolumeComponent
+  - hash:
+      serializedVersion: 2
+      Hash: c1933cc0a2f4ff6eb13333347497beb3
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerFloatField
+  - hash:
+      serializedVersion: 2
+      Hash: 63bdc2cf3273aa9bf650350f19d2af61
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: PixelPerfectCamera
+  - hash:
+      serializedVersion: 2
+      Hash: df819f0bc77c8d047eca1df91bbaa90d
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerPanel
+  - hash:
+      serializedVersion: 2
+      Hash: 0a3fa1a367fddc65eb32515029503334
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerButton
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ProgressBarEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasicIconEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 597cfde2e60b842b3acbd2961ff0631b
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ShadowsMidtonesHighlights
+  - hash:
+      serializedVersion: 2
+      Hash: 0f14ae31120a1e77b478059a5b14fb0a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: SliderManager
+  - hash:
+      serializedVersion: 2
+      Hash: 08bb3816fb1bb57f4289511c7a975a07
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManager
+  - hash:
+      serializedVersion: 2
+      Hash: c73b38d1734fde2c84da7bd282f19e54
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: Tonemapping
+  - hash:
+      serializedVersion: 2
+      Hash: 659d6ceab26f9e4237abaaf29249f293
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SettingsPanel
+  - hash:
+      serializedVersion: 2
+      Hash: 23b81d05a0ad0499613fc3e1a4a0501b
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: UniversalRenderPipelineEditorResources
+  - hash:
+      serializedVersion: 2
+      Hash: 6da05449502c54a7bf3cc65b493806ee
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: RenderObjects
+  - hash:
+      serializedVersion: 2
+      Hash: d35acf88626ca55f005c18eabdcb1418
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerInputField
+  - hash:
+      serializedVersion: 2
+      Hash: 760787567e1b60d64a3e421ab83ee14a
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: cfe8c9a3ec36fca5c08dd20fcf754a09
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerIcon
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: HorizontalSelectorEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 6f29b049d6b6b18bee23aaf2fe273e02
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: ColorAdjustments
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: WindowManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: f336e086360abe49a3323e5f1583c35a
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: AudioTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f69dfc6409fbbd89d3689368e99688a8
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerVector2
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerValue
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: CinemachineUniversalPixelPerfect
+  - hash:
+      serializedVersion: 2
+      Hash: decb5ea2736d8cfe604451743977b2c0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasic
+  - hash:
+      serializedVersion: 2
+      Hash: 4a11cfefeec03e5095f7b3195766c3a1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ModalWindowManager
+  - hash:
+      serializedVersion: 2
+      Hash: 5fb0a437811e2f8fa198f0eb0356d03a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ContextMenuContent
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: SliderManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 36112b0a16753cab0931521e4de67ef6
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: LiftGammaGain
+  - hash:
+      serializedVersion: 2
+      Hash: c3d3430df9e3ea95e3e3d587961390fb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: MarkerTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 9f0d2156cb2876cc856eb040bfe23e76
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: CompositeShadowCaster2D
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerUIntField
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: TooltipManagerEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 800c50acba124432abb4cf0d47202e06
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: c5bfd0f6f4664318b8b9f50d88408421
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: DepthOfField
+  - hash:
+      serializedVersion: 2
+      Hash: f310a46eb879fe7d0f3af3eedd11b7a7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerModalWindow
+  - hash:
+      serializedVersion: 2
+      Hash: 2cfa0393b5123bd14aa7b550fd8912e4
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: ShadowCaster2D
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerEnumHistory
+  - hash:
+      serializedVersion: 2
+      Hash: 89229a620f85ef21de336ab85a13d351
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerCanvas
+  - hash:
+      serializedVersion: 2
+      Hash: da4cc51a02ce84afe2cecd27cfe6997a
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TextMeshPro
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIElementInFront
+  - hash:
+      serializedVersion: 2
+      Hash: 3165968ba45c74472d279ba04455fccb
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_ColorGradient
+  - hash:
+      serializedVersion: 2
+      Hash: cd1e91f5afed259a1512bbf18dc12bd7
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: 
+    className: SceneRenderPipeline
+  - hash:
+      serializedVersion: 2
+      Hash: a2a190537bd48bfaa94460b49f94e12f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerAnimatedIcon
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: BaseInput
+  - hash:
+      serializedVersion: 2
+      Hash: 270bc4550778a1f5d6260bae8f25d706
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ToggleAnim
+  - hash:
+      serializedVersion: 2
+      Hash: caa533b001ae39b864ba8425019e2268
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Outline
+  - hash:
+      serializedVersion: 2
+      Hash: 3d7931eee79156476e4b262fa708acdd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: RadialSlider
+  - hash:
+      serializedVersion: 2
+      Hash: 3817a87e7354469cadde66e249e782b2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
+      Hash: 5dea360fb0b147724ac344e6f399c2f3
+    assemblyName: Unity.TextMeshPro.dll
+    namespaceName: TMPro
+    className: TMP_SubMesh
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: UIManagerSliderEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 134520f170644886bce038a4038a42c9
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: PaniniProjection
+  - hash:
+      serializedVersion: 2
+      Hash: 0fd689b29ca4e350893b80d82ac126b1
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: bb6b9a25e695d7981ce2d853a697a828
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerVector4
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerIntField
+  - hash:
+      serializedVersion: 2
+      Hash: ca0b8ad3987cd33b3209a508b6e1562e
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering
+    className: FreeCamera
+  - hash:
+      serializedVersion: 2
+      Hash: 748dd2a2a28da4e618912da5ac45684b
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: StandaloneInputModule
+  - hash:
+      serializedVersion: 2
+      Hash: 1f0602e7bad1e0a9cba31ce292eee8bb
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerHBox
+  - hash:
+      serializedVersion: 2
+      Hash: 8220b46879dc5e37db1b940c938f5744
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: 098b08e77f16fc740b87d79978b382b6
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Experimental.Rendering.Universal
+    className: Light2D
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: UnityEngine.UI.Michsky.UI.ModernUIPack
+    className: UIGradientEditor
+  - hash:
+      serializedVersion: 2
+      Hash: d12101a393b60ad83be4621361adf3c2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: NotificationManager
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Michsky.UI.ModernUIPack
+    className: ButtonManagerBasicWithIconEditor
+  - hash:
+      serializedVersion: 2
+      Hash: 08705cef837f5d18a4c86b19b1ccf347
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: Vignette
+  - hash:
+      serializedVersion: 2
+      Hash: 8b8b18ce5ce466450710494b38db41e5
+    assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
+    namespaceName: UnityEngine.Rendering.Universal
+    className: WhiteBalance
+  - hash:
+      serializedVersion: 2
+      Hash: 2388eb9e99b86b3813e7b6dbfe4b3e0c
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 8d35f16c5022311c6f4d9432be73bfcf
+    assemblyName: Unity.RenderPipelines.Core.Runtime.dll
+    namespaceName: UnityEngine.Rendering.UI
+    className: DebugUIHandlerIndirectFloatField
+  - hash:
+      serializedVersion: 2
+      Hash: c3d3430df9e3ea95e3e3d587961390fb
+    assemblyName: Unity.Timeline.dll
+    namespaceName: UnityEngine.Timeline
+    className: PlayableTrack
+  platform: 5
+  scenePathNames:
+  - Assets/Scenes/SampleScene.unity
+  playerPath: D:/GAME_DEV/_15/Fifteen/win_builds/Fifteen.exe

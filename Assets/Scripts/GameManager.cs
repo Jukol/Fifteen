@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Michsky.UI.ModernUIPack;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,13 +34,20 @@ public class GameManager : MonoBehaviour
     int timeScore, previousTime, moves, previousMoves;
 
     [SerializeField]
-    Text shuffleButtonText;
+    Button shuffleButton;
 
     [SerializeField]
     Text movesCounter, bestTimeScoreTimeAndMovesText, bestMovesScoreTimeAndMovesText, bestTimeScoreText, bestMovesScoreText;
 
     [SerializeField]
     float shuffleSpeed;
+
+    AudioSource music;
+
+    [SerializeField]
+    Toggle musicToggle;
+    
+
 
 
     int hours, minutes, seconds, tenthsOfASecond, hundredthOfASecond;
@@ -74,6 +82,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TimerOff()
+    {
+        startTimer = false;
+    }
+
+    public void TimerOn()
+    {
+        startTimer = true;
+    }
+
 
     private void Start()
     {
@@ -97,9 +115,30 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(true);
         topTimeScorePath = Application.persistentDataPath + "/topTimeScore.txt";
         topMovesScorePath = Application.persistentDataPath + "/topMovesScore.txt";
+        music = GetComponent<AudioSource>();
+
+        if (!PlayerPrefs.HasKey("TopTime"))
+            PlayerPrefs.SetInt("TopTime", 1000000);
+
+        if (!PlayerPrefs.HasKey("TopMoves"))
+            PlayerPrefs.SetInt("TopMoves", 1000000);
+
+        if (!PlayerPrefs.HasKey("Music"))
+            PlayerPrefs.SetInt("Music", 1);
+
+        if (PlayerPrefs.GetInt("Music") == 0)
+        {
+            musicToggle.isOn = false;
+        }
+                
+        else if (PlayerPrefs.GetInt("Music") == 1)
+        {
+            musicToggle.isOn = true;
+        }
+                
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (startTimer)
             Timer();
@@ -135,13 +174,12 @@ public class GameManager : MonoBehaviour
                 AfterShuffleRoutine();
             }
         }
-
-
-
     }
 
     public void Randomize()
     {
+        startTimer = false;
+        
         for (int positionOfArray = 0; positionOfArray < pieces.Length; positionOfArray++)
         {
             GameObject obj = pieces[positionOfArray];
@@ -158,11 +196,11 @@ public class GameManager : MonoBehaviour
     {
         movesCounter.gameObject.SetActive(true);
         startTime = Time.time;
-        startTimer = true;
         shuffleButtonPressed = true;
         moves = 0;
-        shuffleButtonText.text = "Reshuffle";
+        //shuffleButton.GetComponent<ButtonManager>()
         afterShuffleRoutine = false;
+        startTimer = true;
     }
 
     public void CheckForWin()
@@ -184,23 +222,23 @@ public class GameManager : MonoBehaviour
             piece15.transform.position == cells[14].transform.position)
         {
             startTimer = false;
-            shuffleButtonText.text = "Play again!";
+            //shuffleButtonText.text = "Play again!";
             shuffleButtonPressed = false;
             TimeScoreText();
             MovesScoreText();
 
-            if (timeScore < previousTime && moves < previousMoves)
+            if (timeScore < PlayerPrefs.GetInt("TopTime") && moves < PlayerPrefs.GetInt("TopMoves"))
             {
                 bestTimeScoreTimeAndMovesText.text = IntToTime(timeScore);
                 bestMovesScoreTimeAndMovesText.text = (moves + 1).ToString();
                 bestTimeAndMovesPanel.SetActive(true);
             }   
-            else if (timeScore < previousTime)
+            else if (timeScore < PlayerPrefs.GetInt("TopTime"))
             {
                 bestTimePanel.SetActive(true);
                 bestTimeScoreText.text = IntToTime(timeScore);
             }   
-            else if (moves < previousMoves)
+            else if (moves < PlayerPrefs.GetInt("TopMoves"))
             {
                 bestMovesPanel.SetActive(true);
                 bestMovesScoreText.text = (moves + 1).ToString();
@@ -222,6 +260,7 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         startTimer = false;
+        PlayerPrefs.Save();
         Application.Quit();
     }
 
@@ -241,48 +280,38 @@ public class GameManager : MonoBehaviour
     }
 
     void TimeScoreText()
-    {
-        if (!File.Exists(topTimeScorePath))
-            File.WriteAllText(topTimeScorePath, "1000000");
-        
-        if (File.Exists(topTimeScorePath))
-            previousTime = int.Parse(File.ReadAllText(topTimeScorePath));
-        
-        if (timeScore < previousTime)
+    {   
+        if (timeScore < PlayerPrefs.GetInt("TopTime"))
         {
-            string content = timeScore.ToString();
-            File.WriteAllText(topTimeScorePath, content);
+            PlayerPrefs.SetInt("TopTime", timeScore);
         }
     }
 
     void MovesScoreText()
     {
-        if (!File.Exists(topMovesScorePath))
-            File.WriteAllText(topMovesScorePath, "1000000");
-        
-        if (File.Exists(topMovesScorePath))
-            previousMoves = int.Parse(File.ReadAllText(topMovesScorePath));
-
-        if (moves < previousMoves)
+        if (moves < PlayerPrefs.GetInt("TopMoves"))
         {
-            string content = (moves + 1).ToString();
-            File.WriteAllText(topMovesScorePath, content);
+            PlayerPrefs.SetInt("TopMoves", moves + 1);
         }
     }
 
     public void ShowScoreText()
     {
-        
-        if (File.Exists(topTimeScorePath) && File.Exists(topMovesScorePath))
-        {
-            int getTimeValueFromFile = int.Parse(File.ReadAllText(topTimeScorePath));
-            
-            string timeString = IntToTime(getTimeValueFromFile);
-            string movesString = File.ReadAllText(topMovesScorePath);
-            
+        string timeString;
+        string movesString;
 
-            topTimeScore.text = "Best time: " + timeString + "\n" + "Best moves: " + movesString;
-        }
+
+        if (PlayerPrefs.GetInt("TopTime") == 1000000)
+            timeString = "";
+        else
+            timeString = IntToTime(PlayerPrefs.GetInt("TopTime"));
+
+        if (PlayerPrefs.GetInt("TopMoves") == 1000000)
+            movesString = "";
+        else
+            movesString = PlayerPrefs.GetInt("TopMoves").ToString();
+
+        topTimeScore.text = "Best time: " + timeString + "\n" + "Best moves: " + movesString;
     }
 
     string IntToTime(int value)
@@ -309,6 +338,26 @@ public class GameManager : MonoBehaviour
         return timeString;
     }
 
- 
+    public void MusicMuteToggle()
+    {
+        if (music.mute == true)
+        {
+            music.mute = false;
+            PlayerPrefs.SetInt("Music", 1);
+        }
+        else if (music.mute == false)
+        {
+            music.mute = true;
+            PlayerPrefs.SetInt("Music", 0);
+        }
+    }
+
+    public void StartScreenStartButton()//turn timer back on after pause
+    {
+        if (elapsedTimeText.text != "")
+        {
+            startTimer = true;
+        }
+    }
 
 }
