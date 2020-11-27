@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsPanel : MonoBehaviour
 {
     [SerializeField]
     Animator anim;
-
-
-
     public void MoveIn()
     {
         this.gameObject.SetActive(true);

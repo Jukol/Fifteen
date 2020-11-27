@@ -1464,7 +1464,7 @@ ScriptsOnlyBuild:
     className: RadialSlider
   - hash:
       serializedVersion: 2
-      Hash: 3817a87e7354469cadde66e249e782b2
+      Hash: 87fc5f786ae7c8efd0ab4921e3731a8d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1585,4 +1585,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0030.apk
+  playerPath: D:/GAME_DEV/_15/Fifteen/builds/fifteen_0034.apk

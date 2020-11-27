@@ -13,31 +13,24 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     GameObject[] pieces = new GameObject[15];
-    GameObject piece01, piece02, piece03, piece04, piece05, piece06, piece07, piece08, piece09, piece10, piece11, piece12, piece13, piece14, piece15;
+    GameObject piece01, piece02, piece03, piece04, piece05, piece06, piece07, piece08, piece09, piece10, piece11, piece12, piece13, piece14, piece15; 
     [SerializeField]
-    Text elapsedTimeText;
+    GameObject startPanel, bestTimePanel, goodJobPanel, bestMovesPanel, bestTimeAndMovesPanel, timerBox, movesBox;
+    
+    [SerializeField]
+    Text elapsedTimeText, movesText, topTimeScore, movesCounter, bestTimeScoreTimeAndMovesText, bestMovesScoreTimeAndMovesText, bestTimeScoreText, bestMovesScoreText;
 
     [SerializeField]
     AudioClip woodSlide;
 
-    [SerializeField]
-    GameObject startPanel;
-
-    [SerializeField]
-    Text movesText;
-
-    [SerializeField]
-    Text topTimeScore;
-
     Animator startPanelAnim;
-    string elapsedTime, hoursText, minutesText, secondsText, tenthsOfASecondText, topTimeScorePath, topMovesScorePath;
-    int timeScore, previousTime, moves, previousMoves;
+    
+    string elapsedTime;
+    
+    int timeScore, moves;
 
     [SerializeField]
-    Button shuffleButton;
-
-    [SerializeField]
-    Text movesCounter, bestTimeScoreTimeAndMovesText, bestMovesScoreTimeAndMovesText, bestTimeScoreText, bestMovesScoreText;
+    ButtonManager shuffleButton, startButtonOnStartPanel;
 
     [SerializeField]
     float shuffleSpeed;
@@ -45,41 +38,21 @@ public class GameManager : MonoBehaviour
     AudioSource music;
 
     [SerializeField]
-    Toggle musicToggle;
-    
+    Toggle musicToggle, soundFXToggle, showTimerToglle, showMovesToggle;
 
+    bool soundFX, startTimer, shuffleButtonPressed, shuffle, afterShuffleRoutine = true, startButtonPressedOnce;
 
-
-    int hours, minutes, seconds, tenthsOfASecond, hundredthOfASecond;
     float startTime;
-    bool startTimer;
-    bool shuffleButtonPressed;
-
-    [SerializeField]
-    GameObject bestTimePanel, goodJobPanel, bestMovesPanel, bestTimeAndMovesPanel;
-
-    bool shuffle, afterShuffleRoutine = true;
-
-
 
     public int Moves 
     { 
-        get
-        {
-            return moves;
-        }
-        set
-        {
-            moves = value;
-        }
+        get { return moves; }
+        set { moves = value; }                             
     }
 
     public bool ShuffleButtonPressed
     {
-        get
-        {
-            return shuffleButtonPressed;
-        }
+        get { return shuffleButtonPressed; }
     }
 
     public void TimerOff()
@@ -113,9 +86,8 @@ public class GameManager : MonoBehaviour
 
         startPanelAnim = startPanel.GetComponent<Animator>();
         startPanel.SetActive(true);
-        topTimeScorePath = Application.persistentDataPath + "/topTimeScore.txt";
-        topMovesScorePath = Application.persistentDataPath + "/topMovesScore.txt";
         music = GetComponent<AudioSource>();
+
 
         if (!PlayerPrefs.HasKey("TopTime"))
             PlayerPrefs.SetInt("TopTime", 1000000);
@@ -126,22 +98,59 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Music"))
             PlayerPrefs.SetInt("Music", 1);
 
+        if (!PlayerPrefs.HasKey("SoundFX"))
+            PlayerPrefs.SetInt("SoundsFX", 1);
+
+        if (!PlayerPrefs.HasKey("ShowTimer"))
+            PlayerPrefs.SetInt("ShowTimer", 1);
+
+        if (!PlayerPrefs.HasKey("ShowMoves"))
+            PlayerPrefs.SetInt("ShowMoves", 1);
+
         if (PlayerPrefs.GetInt("Music") == 0)
-        {
             musicToggle.isOn = false;
-        }
-                
         else if (PlayerPrefs.GetInt("Music") == 1)
-        {
             musicToggle.isOn = true;
+
+        if (PlayerPrefs.GetInt("SoundFX") == 0)
+        {
+            soundFXToggle.isOn = false;
+            soundFX = false;
         }
-                
+        else if (PlayerPrefs.GetInt("SoundFX") == 1)
+        {
+            soundFXToggle.isOn = true;
+            soundFX = true;
+        }
+
+        if (PlayerPrefs.GetInt("ShowTimer") == 0)
+        {
+            showTimerToglle.isOn = false;
+            timerBox.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("ShowTimer") == 1)
+        {
+            showTimerToglle.isOn = true;
+            timerBox.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("ShowMoves") == 0)
+        {
+            showMovesToggle.isOn = false;
+            movesBox.SetActive(false);
+        }
+        else if (PlayerPrefs.GetInt("ShowMoves") == 1)
+        {
+            showMovesToggle.isOn = true;
+            movesBox.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
     {
         if (startTimer)
             Timer();
+        
         movesText.text = "Moves: " + moves.ToString();
 
         if (shuffle)
@@ -180,7 +189,7 @@ public class GameManager : MonoBehaviour
     {
         startTimer = false;
         
-        for (int positionOfArray = 0; positionOfArray < pieces.Length; positionOfArray++)
+        for (int positionOfArray = 0; positionOfArray < pieces.Length; positionOfArray++)//looked this up on YouTube :-)
         {
             GameObject obj = pieces[positionOfArray];
             int randomizeArray = Random.Range(0, positionOfArray);
@@ -198,7 +207,6 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         shuffleButtonPressed = true;
         moves = 0;
-        //shuffleButton.GetComponent<ButtonManager>()
         afterShuffleRoutine = false;
         startTimer = true;
     }
@@ -222,10 +230,10 @@ public class GameManager : MonoBehaviour
             piece15.transform.position == cells[14].transform.position)
         {
             startTimer = false;
-            //shuffleButtonText.text = "Play again!";
+            shuffleButton.buttonText = "Play again!";
             shuffleButtonPressed = false;
-            TimeScoreText();
-            MovesScoreText();
+            TimeScore(); //put top time on PlayerPrefs
+            MovesScore(); //put top moves on PlayerPrefs
 
             if (timeScore < PlayerPrefs.GetInt("TopTime") && moves < PlayerPrefs.GetInt("TopMoves"))
             {
@@ -266,7 +274,8 @@ public class GameManager : MonoBehaviour
 
     public void PlaySound()
     {
-        AudioSource.PlayClipAtPoint(woodSlide, Camera.main.transform.position, 1f);
+        if (soundFX)
+            AudioSource.PlayClipAtPoint(woodSlide, Camera.main.transform.position, 1f);
     }
 
     public void StartPanelAnimationOut()
@@ -279,20 +288,16 @@ public class GameManager : MonoBehaviour
         startPanelAnim.SetTrigger("In");
     }
 
-    void TimeScoreText()
+    void TimeScore()
     {   
         if (timeScore < PlayerPrefs.GetInt("TopTime"))
-        {
             PlayerPrefs.SetInt("TopTime", timeScore);
-        }
     }
 
-    void MovesScoreText()
+    void MovesScore()
     {
         if (moves < PlayerPrefs.GetInt("TopMoves"))
-        {
             PlayerPrefs.SetInt("TopMoves", moves + 1);
-        }
     }
 
     public void ShowScoreText()
@@ -314,7 +319,7 @@ public class GameManager : MonoBehaviour
         topTimeScore.text = "Best time: " + timeString + "\n" + "Best moves: " + movesString;
     }
 
-    string IntToTime(int value)
+    string IntToTime(int value)//convert time in seconds to "03:36:08:49" format
     {
         int hundredths = value % 100;
         int seconds = value / 100 % 60;
@@ -338,6 +343,8 @@ public class GameManager : MonoBehaviour
         return timeString;
     }
 
+   
+    //SETTINGS - MOVE TO SETTINGS.CS (?)
     public void MusicMuteToggle()
     {
         if (music.mute == true)
@@ -352,12 +359,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SoundFXToglle()
+    {
+        if (soundFX)
+        {
+            soundFX = false;
+            PlayerPrefs.SetInt("SoundFX", 0);
+        }   
+        else if (!soundFX)
+        {
+            soundFX = true;
+            PlayerPrefs.SetInt("SoundFX", 1);
+        }
+    }
+
+    public void ShowTimerToggle()
+    {
+        if (timerBox.activeSelf)
+        {
+            timerBox.SetActive(false);
+            PlayerPrefs.SetInt("ShowTimer", 0);
+        }
+        else if (!timerBox.activeSelf)
+        {
+            timerBox.SetActive(true);
+            PlayerPrefs.SetInt("ShowTimer", 1);
+        }
+    }
+
+    public void ShowMovesToggle()
+    {
+        if (movesBox.activeSelf)
+        {
+            movesBox.SetActive(false);
+            PlayerPrefs.SetInt("ShowMoves", 0);
+        }
+        else if (!movesBox.activeSelf)
+        {
+            movesBox.SetActive(true);
+            PlayerPrefs.SetInt("ShowMoves", 1);
+        }
+    }
+    //SETTINGS - MOVE TO SETTINGS.CS (?)
+
     public void StartScreenStartButton()//turn timer back on after pause
     {
         if (elapsedTimeText.text != "")
         {
             startTimer = true;
         }
+
+        startButtonPressedOnce = true;
     }
 
+    public void ChangeTextOnStartButton()
+    {
+        if (startButtonPressedOnce)
+            startButtonOnStartPanel.buttonText = "Resume";
+    }
 }

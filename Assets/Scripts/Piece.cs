@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class Piece : MonoBehaviour, IPointerDownHandler
 {
 
-    Vector3 newPosition, newPosition2, newPosition3;
-    RaycastHit hitInfo, hitInfo2, hitInfo3;
+    Vector3 newPosition, newPosition2, newPosition3; //positions for this piece, one level further, and two levels further
+    RaycastHit hitInfo, hitInfo2, hitInfo3; //colliders for a piece one lever further, and two levels further
     GameObject pieceUp, pieceRight, pieceDown, pieceLeft, pieceUpUp, pieceRightRight, pieceDownDown, pieceLeftLeft;
     [SerializeField]
     GameManager gm;
@@ -27,9 +27,10 @@ public class Piece : MonoBehaviour, IPointerDownHandler
             if (canPlayAudio && canMove)
                 StartCoroutine(SoundWithDelay());
 
+            //FOR SINGLE-PIECE MOVES
             transform.position = Vector3.MoveTowards(transform.position, newPosition, speed);
-            
-            //FOR DOUBLE MOVES
+
+            //FOR DOUBLE-PIECE MOVES
             if (pieceUp != null)
             {
                 pieceUp.transform.position = Vector3.MoveTowards(pieceUp.transform.position, newPosition2, speed);
@@ -65,9 +66,9 @@ public class Piece : MonoBehaviour, IPointerDownHandler
                     pieceLeft = null;
                 }
             }
-            //FOR DOUBLE MOVES
+            //FOR DOUBLE-PIECE MOVES
 
-            //FOR TRIPLE MOVES
+            //FOR TRIPLE-PIECE MOVES
             if (pieceUpUp != null)
             {
                 pieceUpUp.transform.position = Vector3.MoveTowards(pieceUpUp.transform.position, newPosition3, speed);
@@ -103,9 +104,10 @@ public class Piece : MonoBehaviour, IPointerDownHandler
                     pieceLeftLeft = null;
                 }
             }
-            //FOR TRIPLE MOVES
+            //FOR TRIPLE-PIECE MOVES
 
             canPlayAudio = false;
+
             if (transform.position == newPosition)
             {
                 gm.CheckForWin();
@@ -145,7 +147,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
     }
 
 
-    void MoveInOnes()
+    void MoveInOnes() //Looking for an "empty space" around by looking for Cell colliders, which represent empty spaces, and assigning that cell's transform to position to move to (newPosition)
     {
         if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) && hitInfo.collider.tag == "Cell" && gm.ShuffleButtonPressed)
         {
@@ -173,7 +175,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    void MoveInTwos()
+    void MoveInTwos() //Same as MovesInOne, but with checking for empty spaces around pieces next to this one
     {
         if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
@@ -221,7 +223,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    void MoveInThrees()
+    void MoveInThrees() //same as MoveInTwos, but with checking for empty spaces one level further from this piece
     {
         if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, 150f) &&
             hitInfo.collider.tag == "Piece" &&
