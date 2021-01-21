@@ -19,7 +19,6 @@ public class GameManager2 : MonoBehaviour
             return _instance;
         }
     }
-
     private void Awake()
     {
         _instance = this;
