@@ -9,13 +9,13 @@ public class SettingsPanel : MonoBehaviour
     Animator anim;
     public void MoveIn()
     {
-        this.gameObject.SetActive(true);
+        anim.SetTrigger("In");
     }
 
     public void MoveOut()
     {
         anim.SetTrigger("Out");
-        StartCoroutine(PauseAndCloseSettings());
+        //StartCoroutine(PauseAndCloseSettings());
     }
 
     IEnumerator PauseAndCloseSettings()
