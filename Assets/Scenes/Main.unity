@@ -631,7 +631,7 @@ RectTransform:
   m_Children:
   - {fileID: 312113140}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 12
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1246,11 +1246,11 @@ RectTransform:
   - {fileID: 1843774801}
   - {fileID: 1744936661}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 8
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.4001465, y: -2.6999512}
+  m_AnchoredPosition: {x: -1.4001465, y: -2.699951}
   m_SizeDelta: {x: 957.495, y: 698.8729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &106546013
@@ -3581,7 +3581,7 @@ MonoBehaviour:
   timerBox: {fileID: 1480260665}
   movesBox: {fileID: 1031581053}
   musicToggle: {fileID: 978865456}
-  soundFXToggle: {fileID: 1401050864}
+  SoundFXToggle: {fileID: 1401050864}
   showTimerToglle: {fileID: 43510656}
   showMovesToggle: {fileID: 21926396}
   topTimeScoreText: {fileID: 1843774802}
@@ -4430,7 +4430,7 @@ RectTransform:
   - {fileID: 958999960}
   - {fileID: 205431551}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10843,7 +10843,7 @@ RectTransform:
   - {fileID: 1495337865}
   - {fileID: 1621092618}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13664,7 +13664,7 @@ RectTransform:
   - {fileID: 1067080919}
   - {fileID: 1870911771}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13899,9 +13899,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 328274493}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: SoundFXToglle
+      - m_Target: {fileID: 787517354}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SoundFXToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15460,7 +15460,7 @@ RectTransform:
   - {fileID: 1464089965}
   - {fileID: 832446765}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -15967,7 +15967,7 @@ RectTransform:
   - {fileID: 577677832}
   - {fileID: 21926391}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 11
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17575,7 +17575,7 @@ RectTransform:
   - {fileID: 1899040548}
   - {fileID: 2127647097}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 16
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19686,6 +19686,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1135232024377399499}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: set_reshufflePressed
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -20511,7 +20523,7 @@ RectTransform:
   - {fileID: 813971217}
   - {fileID: 10303450}
   m_Father: {fileID: 1977174643}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20825,15 +20837,15 @@ RectTransform:
   - {fileID: 868362676}
   - {fileID: 1480260666}
   - {fileID: 1031581054}
-  - {fileID: 64734694}
   - {fileID: 1519203782}
   - {fileID: 434421933}
-  - {fileID: 1576678051}
-  - {fileID: 29984852}
   - {fileID: 1397576129}
   - {fileID: 1961517108}
   - {fileID: 1067016739}
   - {fileID: 1695221622}
+  - {fileID: 64734694}
+  - {fileID: 1576678051}
+  - {fileID: 29984852}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21923,7 +21935,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

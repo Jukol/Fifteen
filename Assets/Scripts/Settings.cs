@@ -28,13 +28,13 @@ public class Settings : MonoBehaviour
     private string topTimeVarName = "TopTime";
     private string topMovesVarName = "TopMoves";
     private string musicVarName = "Music";
-    private string soundFXVarName = "SoundFX";
+    private string SoundFXVarName = "SoundFX";
     private string showTimerVarName = "ShowTimer";
     private string showMovesVarName = "ShowMoves";
 
     [SerializeField] private GameObject timerBox, movesBox;
 
-    [SerializeField] private Toggle musicToggle, soundFXToggle, showTimerToglle, showMovesToggle;
+    [SerializeField] private Toggle musicToggle, SoundFXToggle, showTimerToglle, showMovesToggle;
 
     [SerializeField] private Text topTimeScoreText;
 
@@ -43,7 +43,7 @@ public class Settings : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey(topTimeVarName))
         {
-            PlayerPrefs.SetFloat(topTimeVarName, float.MaxValue);
+            PlayerPrefs.SetFloat(topTimeVarName, 1000000f);
         }
 
         if (!PlayerPrefs.HasKey(topMovesVarName))
@@ -58,9 +58,9 @@ public class Settings : MonoBehaviour
         }
             
 
-        if (!PlayerPrefs.HasKey(soundFXVarName))
+        if (!PlayerPrefs.HasKey(SoundFXVarName))
         {
-            PlayerPrefs.SetInt(soundFXVarName, 1);
+            PlayerPrefs.SetInt(SoundFXVarName, 1);
         }
             
 
@@ -79,24 +79,22 @@ public class Settings : MonoBehaviour
         if (PlayerPrefs.GetInt(musicVarName) == 0)
         {
             musicToggle.isOn = false;
-            //GameManager2.Instance.Music.mute = true;
         }
         else if (PlayerPrefs.GetInt(musicVarName) == 1)
         {
             musicToggle.isOn = true;
-            //GameManager2.Instance.Music.mute = true;
         }
             
 
-        if (PlayerPrefs.GetInt(soundFXVarName) == 0)
+        if (PlayerPrefs.GetInt(SoundFXVarName) == 0)
         {
-            soundFXToggle.isOn = false;
-            GameManager2.Instance.soundFX = false;
+            SoundFXToggle.isOn = false;
+            GameManager.Instance.SoundFX = false;
         }
-        else if (PlayerPrefs.GetInt(soundFXVarName) == 1)
+        else if (PlayerPrefs.GetInt(SoundFXVarName) == 1)
         {
-            soundFXToggle.isOn = true;
-            GameManager2.Instance.soundFX = true;
+            SoundFXToggle.isOn = true;
+            GameManager.Instance.SoundFX = true;
         }
 
         if (PlayerPrefs.GetInt(showTimerVarName) == 0)
@@ -126,10 +124,10 @@ public class Settings : MonoBehaviour
     public void HighScore()
     {
         if (UIManager.Instance.elapsedTime < PlayerPrefs.GetFloat(topTimeVarName) && 
-            GameManager2.Instance.moves < PlayerPrefs.GetInt(topMovesVarName))
+            GameManager.Instance.moves < PlayerPrefs.GetInt(topMovesVarName))
         {
             PlayerPrefs.SetFloat(topTimeVarName, UIManager.Instance.elapsedTime);
-            PlayerPrefs.SetInt(topMovesVarName, GameManager2.Instance.moves);
+            PlayerPrefs.SetInt(topMovesVarName, GameManager.Instance.moves);
             UIManager.Instance.ShowBestTimeAndMovesPanel();
         }
         else if (UIManager.Instance.elapsedTime < PlayerPrefs.GetFloat(topTimeVarName))
@@ -137,9 +135,9 @@ public class Settings : MonoBehaviour
             PlayerPrefs.SetFloat(topTimeVarName, UIManager.Instance.elapsedTime);
             UIManager.Instance.ShowBestTimePanel();
         }
-        else if (GameManager2.Instance.moves < PlayerPrefs.GetInt(topMovesVarName))
+        else if (GameManager.Instance.moves < PlayerPrefs.GetInt(topMovesVarName))
         {
-            PlayerPrefs.SetInt(topMovesVarName, GameManager2.Instance.moves);
+            PlayerPrefs.SetInt(topMovesVarName, GameManager.Instance.moves);
             UIManager.Instance.ShowBestMovesPanel();
         }
         else
@@ -153,13 +151,13 @@ public class Settings : MonoBehaviour
     {
         string timeString;
         string movesString;
-        TimeSpan elapsedTime = TimeSpan.FromSeconds(UIManager.Instance.elapsedTime);
 
+        TimeSpan highScoreTime = TimeSpan.FromSeconds(PlayerPrefs.GetFloat(topTimeVarName));
 
-        if (PlayerPrefs.GetFloat(topTimeVarName) == Int32.MaxValue)
+        if (PlayerPrefs.GetFloat(topTimeVarName) == 1000000f)
             timeString = "";
         else
-            timeString = elapsedTime.ToString("hh':'mm':'ss':'ff");
+            timeString = highScoreTime.ToString("hh':'mm':'ss':'ff");
 
         if (PlayerPrefs.GetInt(topMovesVarName) == Int32.MaxValue)
             movesString = "";
@@ -171,31 +169,19 @@ public class Settings : MonoBehaviour
 
     public void MusicMuteToggle()
     {
-        if (GameManager2.Instance.Music.mute)
+        if (GameManager.Instance.Music.mute)
         {
-            GameManager2.Instance.Music.mute = false;
+            GameManager.Instance.Music.mute = false;
             PlayerPrefs.SetInt(musicVarName, 1);
         }
-        else if (!GameManager2.Instance.Music.mute)
+        else if (!GameManager.Instance.Music.mute)
         {
-            GameManager2.Instance.Music.mute = true;
+            GameManager.Instance.Music.mute = true;
             PlayerPrefs.SetInt(musicVarName, 0);
         }
     }
 
-    public void SoundFXToglle()
-    {
-        if (GameManager2.Instance.soundFX)
-        {
-            GameManager2.Instance.soundFX = false;
-            PlayerPrefs.SetInt(soundFXVarName, 0);
-        }
-        else if (!GameManager2.Instance.soundFX)
-        {
-            GameManager2.Instance.soundFX = true;
-            PlayerPrefs.SetInt(soundFXVarName, 1);
-        }
-    }
+    
 
 
 }

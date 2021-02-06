@@ -1,420 +1,806 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using Michsky.UI.ModernUIPack;
+using System;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    Transform[] cells = new Transform[16];
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.Log("GameManager2 instance is NULL.");
+            }
 
-    [SerializeField]
-    GameObject[] pieces = new GameObject[15];
-    GameObject piece01, piece02, piece03, piece04, piece05, piece06, piece07, piece08, piece09, piece10, piece11, piece12, piece13, piece14, piece15; 
-    [SerializeField]
-    GameObject startPanel, bestTimePanel, goodJobPanel, bestMovesPanel, bestTimeAndMovesPanel, timerBox, movesBox;
-    
-    [SerializeField]
-    Text elapsedTimeText, movesText, topTimeScore, movesCounter, bestTimeScoreTimeAndMovesText, bestMovesScoreTimeAndMovesText, bestTimeScoreText, bestMovesScoreText;
-
-    [SerializeField]
-    AudioClip woodSlide;
-
-    Animator startPanelAnim;
-    
-    string elapsedTime;
-    
-    int timeScore, moves;
-
-    [SerializeField]
-    ButtonManager shuffleButton, startButtonOnStartPanel;
-
-    [SerializeField]
-    float shuffleSpeed;
-
-    AudioSource music;
-
-    [SerializeField]
-    Toggle musicToggle, soundFXToggle, showTimerToglle, showMovesToggle;
-
-    bool soundFX, startTimer, shuffleButtonPressed, shuffle, afterShuffleRoutine = true, startButtonPressedOnce;
-
-    float startTime;
-
-    public int Moves 
-    { 
-        get { return moves; }
-        set { moves = value; }                             
+            return _instance;
+        }
+    }
+    private void Awake()
+    {
+        _instance = this;
     }
 
-    public bool ShuffleButtonPressed
+    [SerializeField] private List<Transform> _cells;    //to populate positions in Inspector
+    private Transform[,] _grid = new Transform[4, 4];   //to create a 2D array of positions
+
+    [SerializeField] private List<GameObject> _pieces;  //to populate pieces in Inspector
+    private GameObject[,] _arrayOfPieces = new GameObject[4, 4]; //to create a 2D array of pieces
+    private Piece[,] _piece3 = new Piece[4, 4];
+
+    [SerializeField] private GameObject _pieceSet; //parent for pieces on Canvas
+
+    [SerializeField] private float _speed; //piece movement speed during play
+    int[] positionOfEmpty = new int[2];
+
+    //int[] shuffledCellNumbers = new int[16];
+
+    private bool _shufflePressed; //to allow moving of pieces in Piece3
+    public bool reshufflePressed { get; set; } = false;
+    public bool CanClick { get; set; } //to prevent moving before animation is over
+    public bool ShufflePressed //to prevent moving before shuffle is pressed
     {
-        get { return shuffleButtonPressed; }
+        get { return _shufflePressed; }
     }
 
-    public void TimerOff()
+    [SerializeField] AudioClip knockSound;
+
+    [SerializeField] private bool solvable;
+
+
+
+    public int moves { get; set; }
+
+    [SerializeField] private AudioSource _music;
+    public AudioSource Music
     {
-        startTimer = false;
+        get
+        {
+            if (_music == null)
+            {
+                Debug.LogError("Audio Source is NULL.");
+            }
+
+            return _music;
+        }
     }
 
-    public void TimerOn()
+    private bool _soundFX = true;
+    public bool SoundFX
     {
-        startTimer = true;
+        get
+        {
+            return _soundFX;
+        }
+        set
+        {
+            _soundFX = value;
+        }
     }
 
 
     private void Start()
     {
-        piece01 = pieces[0];
-        piece02 = pieces[1];
-        piece03 = pieces[2];
-        piece04 = pieces[3];
-        piece05 = pieces[4];
-        piece06 = pieces[5];
-        piece07 = pieces[6];
-        piece08 = pieces[7];
-        piece09 = pieces[8];
-        piece10 = pieces[9];
-        piece11 = pieces[10];
-        piece12 = pieces[11];
-        piece13 = pieces[12];
-        piece14 = pieces[13];
-        piece15 = pieces[14];
+        ListToGrid(_cells, _grid); //populating _grid with positions from _cells list
+        ListToGrid(_pieces, _arrayOfPieces); //populating 2D array with pieces from _pieces list
 
-        startPanelAnim = startPanel.GetComponent<Animator>();
-        startPanel.SetActive(true);
-        music = GetComponent<AudioSource>();
-
-
-        if (!PlayerPrefs.HasKey("TopTime"))
-            PlayerPrefs.SetInt("TopTime", 1000000);
-
-        if (!PlayerPrefs.HasKey("TopMoves"))
-            PlayerPrefs.SetInt("TopMoves", 1000000);
-
-        if (!PlayerPrefs.HasKey("Music"))
-            PlayerPrefs.SetInt("Music", 1);
-
-        if (!PlayerPrefs.HasKey("SoundFX"))
-            PlayerPrefs.SetInt("SoundsFX", 1);
-
-        if (!PlayerPrefs.HasKey("ShowTimer"))
-            PlayerPrefs.SetInt("ShowTimer", 1);
-
-        if (!PlayerPrefs.HasKey("ShowMoves"))
-            PlayerPrefs.SetInt("ShowMoves", 1);
-
-        if (PlayerPrefs.GetInt("Music") == 0)
-            musicToggle.isOn = false;
-        else if (PlayerPrefs.GetInt("Music") == 1)
-            musicToggle.isOn = true;
-
-        if (PlayerPrefs.GetInt("SoundFX") == 0)
+        for (int row = 0; row < _arrayOfPieces.GetLength(0); row++)
         {
-            soundFXToggle.isOn = false;
-            soundFX = false;
-        }
-        else if (PlayerPrefs.GetInt("SoundFX") == 1)
-        {
-            soundFXToggle.isOn = true;
-            soundFX = true;
-        }
-
-        if (PlayerPrefs.GetInt("ShowTimer") == 0)
-        {
-            showTimerToglle.isOn = false;
-            timerBox.SetActive(false);
-        }
-        else if (PlayerPrefs.GetInt("ShowTimer") == 1)
-        {
-            showTimerToglle.isOn = true;
-            timerBox.SetActive(true);
-        }
-
-        if (PlayerPrefs.GetInt("ShowMoves") == 0)
-        {
-            showMovesToggle.isOn = false;
-            movesBox.SetActive(false);
-        }
-        else if (PlayerPrefs.GetInt("ShowMoves") == 1)
-        {
-            showMovesToggle.isOn = true;
-            movesBox.SetActive(true);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (startTimer)
-            Timer();
-        
-        movesText.text = "Moves: " + moves.ToString();
-
-        if (shuffle)
-        {
-            for (int i = 0; i < pieces.Length; i++)
+            for (int column = 0; column < _arrayOfPieces.GetLength(1); column++)
             {
-                pieces[i].transform.position = Vector3.MoveTowards(pieces[i].transform.position, cells[i].transform.position, shuffleSpeed);
+                _arrayOfPieces[row, column] = Instantiate(_arrayOfPieces[row, column], _grid[row, column].position, Quaternion.identity, _pieceSet.transform); //arranging pieces on board
+                _piece3[row, column] = _arrayOfPieces[row, column].GetComponent<Piece>(); //getting Piece component of each piece on the array
+                //_piece3[row, column].PiecePositionOnGrid = PositionOnGrid(_arrayOfPieces[row, column], _grid); //assigning grid position for each piece
             }
         }
 
-        if (pieces[0].transform.position == cells[0].transform.position &&
-                pieces[1].transform.position == cells[1].transform.position &&
-                pieces[2].transform.position == cells[2].transform.position &&
-                pieces[3].transform.position == cells[3].transform.position &&
-                pieces[4].transform.position == cells[4].transform.position &&
-                pieces[5].transform.position == cells[5].transform.position &&
-                pieces[6].transform.position == cells[6].transform.position &&
-                pieces[7].transform.position == cells[7].transform.position &&
-                pieces[8].transform.position == cells[8].transform.position &&
-                pieces[9].transform.position == cells[9].transform.position &&
-                pieces[10].transform.position == cells[10].transform.position &&
-                pieces[11].transform.position == cells[11].transform.position &&
-                pieces[12].transform.position == cells[12].transform.position &&
-                pieces[13].transform.position == cells[13].transform.position &&
-                pieces[14].transform.position == cells[14].transform.position)
+        CanClick = true;
+    }
+
+    public void ListToGrid<T>(List<T> list, T[,] grid)
+    {
+        for (int row = 0; row < grid.GetLength(0); row++)
         {
-            shuffle = false;
-            if (afterShuffleRoutine == true)
+            for (int column = 0; column < grid.GetLength(1); column++)
             {
-                AfterShuffleRoutine();
+                switch (row)
+                {
+                    case 0:
+                        grid[row, column] = list[column];           //-x-|-0-|-0-|-0-
+                        break;
+                    case 1:
+                        grid[row, column] = list[column + 4];       //-x-|-0-|-0-|-0-
+                        break;                                      //-x-|-0-|-0-|-0-
+                    case 2:
+                        grid[row, column] = list[column + 8];       //-x-|-0-|-0-|-0-
+                        break;                                      //-x-|-0-|-0-|-0-
+                                                                    //-x-|-0-|-0-|-0-
+                    
+                    case 3:                                         //-x-|-0-|-0-|-0-
+                        grid[row, column] = list[column + 12];      //-x-|-0-|-0-|-0-
+                        break;                                      //-x-|-0-|-0-|-0-
+                                                                    //-x-|-0-|-0-|-0-
+                    default:
+                        return;
+                }
             }
         }
     }
 
-    public void Randomize()
+    public void Shuffle()
     {
-        startTimer = false;
-        
-        for (int positionOfArray = 0; positionOfArray < pieces.Length; positionOfArray++)//looked this up on YouTube :-)
+        List<Transform> shuffledCells = _cells;
+        Transform[,] shuffledGrid = new Transform[4, 4];
+
+        for (int i = 0; i < shuffledCells.Count; i++)
         {
-            GameObject obj = pieces[positionOfArray];
-            int randomizeArray = Random.Range(0, positionOfArray);
-            pieces[positionOfArray] = pieces[randomizeArray];
-            pieces[randomizeArray] = obj;
+            Transform obj = shuffledCells[i];
+            int random = UnityEngine.Random.Range(0, i);
+            shuffledCells[i] = shuffledCells[random];
+            shuffledCells[random] = obj;
         }
 
-        shuffle = true;
-        afterShuffleRoutine = true;
-    }
-
-    private void AfterShuffleRoutine()
-    {
-        movesCounter.gameObject.SetActive(true);
-        startTime = Time.time;
-        shuffleButtonPressed = true;
+        ListToGrid(shuffledCells, shuffledGrid);
+        StartCoroutine(ShuffleProcedure(shuffledGrid));
         moves = 0;
-        afterShuffleRoutine = false;
-        startTimer = true;
+        UIManager.Instance.UpdateMovesText(moves);
+        _shufflePressed = true;
     }
 
-    public void CheckForWin()
+    public int[] PositionOnGrid(GameObject sourceItem, Transform[,] targetGrid)
     {
-        if (piece01.transform.position == cells[0].transform.position &&
-            piece02.transform.position == cells[1].transform.position &&
-            piece03.transform.position == cells[2].transform.position &&
-            piece04.transform.position == cells[3].transform.position &&
-            piece05.transform.position == cells[4].transform.position &&
-            piece06.transform.position == cells[5].transform.position &&
-            piece07.transform.position == cells[6].transform.position &&
-            piece08.transform.position == cells[7].transform.position &&
-            piece09.transform.position == cells[8].transform.position &&
-            piece10.transform.position == cells[9].transform.position &&
-            piece11.transform.position == cells[10].transform.position &&
-            piece12.transform.position == cells[11].transform.position &&
-            piece13.transform.position == cells[12].transform.position &&
-            piece14.transform.position == cells[13].transform.position &&
-            piece15.transform.position == cells[14].transform.position)
-        {
-            startTimer = false;
-            shuffleButton.buttonText = "Play again!";
-            shuffleButtonPressed = false;
-            TimeScore(); //put top time on PlayerPrefs
-            MovesScore(); //put top moves on PlayerPrefs
+        int[] position = new int[2];
 
-            if (timeScore < PlayerPrefs.GetInt("TopTime") && moves < PlayerPrefs.GetInt("TopMoves"))
+        for (int row = 0; row < targetGrid.GetLength(0); row++)
+        {
+            for (int column = 0; column < targetGrid.GetLength(1); column++)
             {
-                bestTimeScoreTimeAndMovesText.text = IntToTime(timeScore);
-                bestMovesScoreTimeAndMovesText.text = (moves + 1).ToString();
-                bestTimeAndMovesPanel.SetActive(true);
-            }   
-            else if (timeScore < PlayerPrefs.GetInt("TopTime"))
+                if (sourceItem.transform.position == targetGrid[row, column].transform.position)
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private Piece[] GridToArray()
+    {
+        Piece[] newArray = new Piece[16];
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
             {
-                bestTimePanel.SetActive(true);
-                bestTimeScoreText.text = IntToTime(timeScore);
-            }   
-            else if (moves < PlayerPrefs.GetInt("TopMoves"))
+                if (_piece3[row, column].PiecePositionOnGrid[0] == 0 && _piece3[row, column].PiecePositionOnGrid[1] == 0)
+                {
+                    newArray[0] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 0 && _piece3[row, column].PiecePositionOnGrid[1] == 1)
+                {
+                    newArray[1] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 0 && _piece3[row, column].PiecePositionOnGrid[1] == 2)
+                {
+                    newArray[2] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 0 && _piece3[row, column].PiecePositionOnGrid[1] == 3)
+                {
+                    newArray[3] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 1 && _piece3[row, column].PiecePositionOnGrid[1] == 0)
+                {
+                    newArray[4] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 1 && _piece3[row, column].PiecePositionOnGrid[1] == 1)
+                {
+                    newArray[5] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 1 && _piece3[row, column].PiecePositionOnGrid[1] == 2)
+                {
+                    newArray[6] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 1 && _piece3[row, column].PiecePositionOnGrid[1] == 3)
+                {
+                    newArray[7] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 2 && _piece3[row, column].PiecePositionOnGrid[1] == 0)
+                {
+                    newArray[8] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 2 && _piece3[row, column].PiecePositionOnGrid[1] == 1)
+                {
+                    newArray[9] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 2 && _piece3[row, column].PiecePositionOnGrid[1] == 2)
+                {
+                    newArray[10] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 2 && _piece3[row, column].PiecePositionOnGrid[1] == 3)
+                {
+                    newArray[11] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 3 && _piece3[row, column].PiecePositionOnGrid[1] == 0)
+                {
+                    newArray[12] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 3 && _piece3[row, column].PiecePositionOnGrid[1] == 1)
+                {
+                    newArray[13] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 3 && _piece3[row, column].PiecePositionOnGrid[1] == 2)
+                {
+                    newArray[14] = _piece3[row, column];
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[0] == 3 && _piece3[row, column].PiecePositionOnGrid[1] == 3)
+                {
+                    newArray[15] = _piece3[row, column];
+                }
+            }
+        }
+
+        return newArray;
+    } //populating shuffled 1D array for solvability method
+
+    public void MovablePieces()
+    {
+        for (int row = 0; row < _arrayOfPieces.GetLength(0); row++)
+        {
+            for (int column = 0; column < _arrayOfPieces.GetLength(0); column++)
             {
-                bestMovesPanel.SetActive(true);
-                bestMovesScoreText.text = (moves + 1).ToString();
-            }   
+                if (_piece3[row, column].PiecePositionOnGrid[0] == _piece3[3, 3].PiecePositionOnGrid[0])// piece and empty are in the same row
+                {
+                    _piece3[row, column].Movable = true;
+
+                    if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == 1) //difference in columns
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the right 1";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == -1)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the left 1";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == 2)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the right 2";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == -2)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the left 2";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == 3)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the right 3";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[1] - _piece3[3, 3].PiecePositionOnGrid[1] == -3)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "on the left 3";
+                    }
+                }
+                else if (_piece3[row, column].PiecePositionOnGrid[1] == _piece3[3, 3].PiecePositionOnGrid[1])
+                {
+                    _piece3[row, column].Movable = true;
+
+                    if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == 1)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "below 1";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == -1)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "above 1";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == 2)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "below 2";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == -2)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "above 2";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == 3)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "below 3";
+                    }
+                    else if (_piece3[row, column].PiecePositionOnGrid[0] - _piece3[3, 3].PiecePositionOnGrid[0] == -3)
+                    {
+                        _piece3[row, column].LevelFromEmpty = "above 3";
+                    }
+                }
+                else
+                {
+                    _arrayOfPieces[row, column].GetComponent<Piece>().Movable = false;
+                    _piece3[row, column].LevelFromEmpty = "";
+                }
+            }
+        }
+    }
+
+    public void Move(GameObject thisPiece, int[] positionOnGrid, string levelFromEmpty)
+    {
+        GameObject pieceBelow = _arrayOfPieces[PieceBelowPosition(positionOnGrid)[0], PieceBelowPosition(positionOnGrid)[1]];
+        GameObject pieceAbove = _arrayOfPieces[PieceAbovePosition(positionOnGrid)[0], PieceAbovePosition(positionOnGrid)[1]];
+        GameObject pieceOnTheRight = _arrayOfPieces[PieceOnTheRightPosition(positionOnGrid)[0], PieceOnTheRightPosition(positionOnGrid)[1]];
+        GameObject pieceOnTheLeft = _arrayOfPieces[PieceOnTheLeftPosition(positionOnGrid)[0], PieceOnTheLeftPosition(positionOnGrid)[1]];
+
+        GameObject pieceBelowBelow = _arrayOfPieces[PieceBelowBelowPosition(positionOnGrid)[0], PieceBelowBelowPosition(positionOnGrid)[1]];
+        GameObject pieceAboveAbove = _arrayOfPieces[PieceAboveAbovePosition(positionOnGrid)[0], PieceAboveAbovePosition(positionOnGrid)[1]];
+        GameObject pieceOnTheRightRight = _arrayOfPieces[PieceOnTheRightRightPosition(positionOnGrid)[0], PieceOnTheRightRightPosition(positionOnGrid)[1]];
+        GameObject pieceOnTheLeftLeft = _arrayOfPieces[PieceOnTheLeftLeftPosition(positionOnGrid)[0], PieceOnTheLeftLeftPosition(positionOnGrid)[1]];
+
+
+
+        if (levelFromEmpty == "above 1" || levelFromEmpty == "on the right 1" || levelFromEmpty == "below 1" || levelFromEmpty == "on the left 1")
+        {
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure1(thisPiece, _arrayOfPieces[3, 3].transform.position));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+
+        else if (levelFromEmpty == "above 2")
+        {
+            Vector3 down = _grid[positionOnGrid[0] + 1, positionOnGrid[1]].position;
+            Vector3 down2 = _grid[positionOnGrid[0] + 2, positionOnGrid[1]].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure2(
+                thisPiece, down,
+                pieceBelow, down2));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "below 2")
+        {
+            Vector3 up = _grid[positionOnGrid[0] - 1, positionOnGrid[1]].position;
+            Vector3 up2 = _grid[positionOnGrid[0] - 2, positionOnGrid[1]].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure2(
+                thisPiece, up,
+                pieceAbove, up2));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "on the right 2")
+        {
+            Vector3 left = _grid[positionOnGrid[0], positionOnGrid[1] - 1].position;
+            Vector3 left2 = _grid[positionOnGrid[0], positionOnGrid[1] - 2].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure2(
+                thisPiece, left,
+                pieceOnTheLeft, left2));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "on the left 2")
+        {
+            Vector3 right = _grid[positionOnGrid[0], positionOnGrid[1] + 1].position;
+            Vector3 right2 = _grid[positionOnGrid[0], positionOnGrid[1] + 2].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure2(
+                thisPiece, right,
+                pieceOnTheRight, right2));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+
+        else if (levelFromEmpty == "above 3")
+        {
+            Vector3 down = _grid[positionOnGrid[0] + 1, positionOnGrid[1]].position;
+            Vector3 down2 = _grid[positionOnGrid[0] + 2, positionOnGrid[1]].position;
+            Vector3 down3 = _grid[positionOnGrid[0] + 3, positionOnGrid[1]].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure3(
+                thisPiece, down,
+                pieceBelow, down2,
+                pieceBelowBelow, down3));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "below 3")
+        {
+            Vector3 up = _grid[positionOnGrid[0] - 1, positionOnGrid[1]].position;
+            Vector3 up2 = _grid[positionOnGrid[0] - 2, positionOnGrid[1]].position;
+            Vector3 up3 = _grid[positionOnGrid[0] - 3, positionOnGrid[1]].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure3(
+                thisPiece, up,
+                pieceAbove, up2,
+                pieceAboveAbove, up3));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "on the right 3")
+        {
+            Vector3 left = _grid[positionOnGrid[0], positionOnGrid[1] - 1].position;
+            Vector3 left2 = _grid[positionOnGrid[0], positionOnGrid[1] - 2].position;
+            Vector3 left3 = _grid[positionOnGrid[0], positionOnGrid[1] - 3].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure3(
+                thisPiece, left,
+                pieceOnTheLeft, left2,
+                pieceOnTheLeftLeft, left3));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+        else if (levelFromEmpty == "on the left 3")
+        {
+            Vector3 right = _grid[positionOnGrid[0], positionOnGrid[1] + 1].position;
+            Vector3 right2 = _grid[positionOnGrid[0], positionOnGrid[1] + 2].position;
+            Vector3 right3 = _grid[positionOnGrid[0], positionOnGrid[1] + 3].position;
+            Vector3 tempPosition = thisPiece.transform.position;
+            StartCoroutine(DoTweenProcedure3(
+                thisPiece, right,
+                pieceOnTheRight, right2,
+                pieceOnTheRightRight, right3));
+            _arrayOfPieces[3, 3].transform.position = tempPosition;
+        }
+
+        moves++;
+        UIManager.Instance.UpdateMovesText(moves);
+    }
+
+    private void UpdatePositions()
+    {
+        for (int row = 0; row < _arrayOfPieces.GetLength(0); row++)
+        {
+            for (int column = 0; column < _arrayOfPieces.GetLength(1); column++)
+            {
+                _piece3[row, column].PiecePositionOnGrid = PositionOnGrid(_arrayOfPieces[row, column], _grid);
+            }
+        }
+    }
+
+    private int[] PieceBelowPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] + 1 && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1])
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceAbovePosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] - 1 && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1])
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceOnTheLeftPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1] - 1)
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceOnTheRightPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1] + 1)
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+
+    private int[] PieceBelowBelowPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] + 2 && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1])
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceAboveAbovePosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] - 2 && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1])
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceOnTheLeftLeftPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1] - 2)
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private int[] PieceOnTheRightRightPosition(int[] positionOnGrid)
+    {
+        int[] position = new int[2];
+
+        for (int row = 0; row < _piece3.GetLength(0); row++)
+        {
+            for (int column = 0; column < _piece3.GetLength(1); column++)
+            {
+                if (_piece3[row, column].PiecePositionOnGrid[0] == positionOnGrid[0] && _piece3[row, column].PiecePositionOnGrid[1] == positionOnGrid[1] + 2)
+                {
+                    position[0] = row;
+                    position[1] = column;
+                }
+            }
+        }
+
+        return position;
+    }
+
+    private void CheckForWin()
+    {
+        int winScore = 0;
+
+        for (int row = 0; row < _arrayOfPieces.GetLength(0); row++)
+        {
+            for (int column = 0; column < _arrayOfPieces.GetLength(1); column++)
+            {
+                if (_arrayOfPieces[row, column].transform.position == _grid[row, column].position)
+                {
+                    winScore++;
+                    if (winScore == 16)
+                    {
+                        UIManager.Instance.StopTimer();
+                        Settings.Instance.HighScore();
+                    }
+                }
+            }
+
+        }
+    }
+
+    IEnumerator DoTweenProcedure1(GameObject obj, Vector3 targetPosition)
+    {
+        CanClick = false;
+        Tween myTween = obj.transform.DOMove(targetPosition, _speed);
+        yield return myTween.WaitForCompletion();
+        if (_soundFX)
+        {
+            AudioSource.PlayClipAtPoint(knockSound, Camera.main.transform.position, 1f);
+        }
+        UpdatePositions();
+        MovablePieces();
+        CanClick = true;
+        CheckForWin();
+    }
+
+    IEnumerator DoTweenProcedure2(
+        GameObject obj1, Vector3 targetPosition1,
+        GameObject obj2, Vector3 targetPosition2)
+    {
+        CanClick = false;
+        Tween myTween1 = obj1.transform.DOMove(targetPosition1, _speed);
+        Tween myTween2 = obj2.transform.DOMove(targetPosition2, _speed);
+        yield return myTween2.WaitForCompletion();
+        if (_soundFX)
+        {
+            AudioSource.PlayClipAtPoint(knockSound, Camera.main.transform.position, 1f);
+        }
+        UpdatePositions();
+        MovablePieces();
+        CanClick = true;
+        CheckForWin();
+    }
+
+    IEnumerator DoTweenProcedure3(
+        GameObject obj1, Vector3 targetPosition1,
+        GameObject obj2, Vector3 targetPosition2,
+        GameObject obj3, Vector3 targetPosition3)
+    {
+        CanClick = false;
+        Tween myTween = obj1.transform.DOMove(targetPosition1, _speed);
+        Tween myTween2 = obj2.transform.DOMove(targetPosition2, _speed);
+        Tween myTween3 = obj3.transform.DOMove(targetPosition3, _speed);
+        yield return myTween3.WaitForCompletion();
+        if (_soundFX)
+        {
+            AudioSource.PlayClipAtPoint(knockSound, Camera.main.transform.position, 1f);
+        }
+        UpdatePositions();
+        MovablePieces();
+        CanClick = true;
+        CheckForWin();
+    }
+
+    IEnumerator ShuffleProcedure(Transform[,] shuffledGrid)//animating shuffling
+    {  
+        Tween goodTween = null;
+
+        // Moving pieces
+
+        for (int row = 0; row < shuffledGrid.GetLength(0); row++)
+        {
+            for (int column = 0; column < shuffledGrid.GetLength(1); column++)
+            {
+                goodTween = _arrayOfPieces[row, column].transform.DOMove(shuffledGrid[row, column].position, 1);
+            }
+        }
+
+        yield return goodTween.WaitForCompletion();
+
+        
+        
+        // Getting piece positions on grid
+
+        for (int row = 0; row < shuffledGrid.GetLength(0); row++)
+        {
+            for (int column = 0; column < shuffledGrid.GetLength(1); column++)
+            {
+                _piece3[row, column].PiecePositionOnGrid = PositionOnGrid(_arrayOfPieces[row, column], _grid);
+            }
+        }
+
+        
+        int[] newArrayNumbers = new int[16];
+
+        for (int i = 0; i < GridToArray().Length; i++)
+        {
+
+            newArrayNumbers[i] = GridToArray()[i].MyNumber; //seeing what piece is on each index of shuffled array 
+            //!!! Try to move this out of coroutine!!!
+        }
+
+        Solvability(newArrayNumbers);
+
+        if (solvable)
+        {
+            UIManager.Instance.StartTimer();
+        }
+        else
+        {
+            if (reshufflePressed)
+            {
+                Shuffle();
+            }
             else
             {
-                goodJobPanel.SetActive(true);
+                UIManager.Instance.ShowUnsolvablePanel();
             }
         }
+
+        MovablePieces();
+
     }
 
-    public void Timer()
+    private bool Solvability(int[] list)
     {
-        timeScore = (int)((Time.time - startTime) * 100);
-        elapsedTime = IntToTime(timeScore);
-        elapsedTimeText.text = elapsedTime;
+        //count inversions
+
+        int inversionCount = 0;
+        for (int i = 0; i < list.Length - 1; i++)
+        {
+            for (int j = i + 1; j < list.Length; j++)
+            {
+                if (list[i] != 0)
+                {
+                    if (list[j] != 0)
+                    {
+                        if (list[i] > list[j])
+                        {
+                            inversionCount++;
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        Debug.Log("Inversion count: " + inversionCount);
+
+        //find row of empty
+
+        positionOfEmpty = PositionOnGrid(_arrayOfPieces[3, 3], _grid);
+
+        int rowOfEmpty = positionOfEmpty[0] + 1;
+
+        Debug.Log("Row of empty: " + rowOfEmpty);
+
+        if (rowOfEmpty == 1 || rowOfEmpty == 3)
+        {
+            if (inversionCount % 2 != 0)
+            {
+                solvable = true;
+                Debug.Log("Puzzle solvable");
+            }
+            else if (inversionCount % 2 == 0)
+            {
+                solvable = false;
+                Debug.Log("Puzzle NOT solvable");
+            }
+        }
+        else if (rowOfEmpty == 2 || rowOfEmpty == 4)
+        {
+            if (inversionCount % 2 == 0)
+            {
+                solvable = true;
+                Debug.Log("Puzzle solvable");
+            }
+            else if (inversionCount % 2 != 0)
+            {
+                solvable = false;
+                Debug.Log("Puzzle NOT solvable");
+            }
+        }
+
+        return solvable;
     }
 
     public void QuitGame()
     {
-        startTimer = false;
         PlayerPrefs.Save();
         Application.Quit();
     }
 
-    public void PlaySound()
-    {
-        if (soundFX)
-            AudioSource.PlayClipAtPoint(woodSlide, Camera.main.transform.position, 1f);
-    }
 
-    public void StartPanelAnimationOut()
-    {
-        startPanelAnim.SetTrigger("Out");
-    }
-
-    public void StartPanelAnimationIn()
-    {
-        startPanelAnim.SetTrigger("In");
-    }
-
-    void TimeScore()
-    {   
-        if (timeScore < PlayerPrefs.GetInt("TopTime"))
-            PlayerPrefs.SetInt("TopTime", timeScore);
-    }
-
-    void MovesScore()
-    {
-        if (moves < PlayerPrefs.GetInt("TopMoves"))
-            PlayerPrefs.SetInt("TopMoves", moves + 1);
-    }
-
-    public void ShowScoreText()
-    {
-        string timeString;
-        string movesString;
-
-
-        if (PlayerPrefs.GetInt("TopTime") == 1000000)
-            timeString = "";
-        else
-            timeString = IntToTime(PlayerPrefs.GetInt("TopTime"));
-
-        if (PlayerPrefs.GetInt("TopMoves") == 1000000)
-            movesString = "";
-        else
-            movesString = PlayerPrefs.GetInt("TopMoves").ToString();
-
-        topTimeScore.text = "Best time: " + timeString + "\n" + "Best moves: " + movesString;
-    }
-
-    string IntToTime(int value)//convert time in seconds to "03:36:08:49" format
-    {
-        int hundredths = value % 100;
-        int seconds = value / 100 % 60;
-        int minutes = value / 100 / 60 % 60;
-        int hours = value / 100 / 60 / 60;
-
-        string hundredthsString = hundredths.ToString();
-        if (hundredths < 10)
-            hundredthsString = "0" + hundredthsString;
-        string secondsString = seconds.ToString();
-        if (seconds < 10)
-            secondsString = "0" + secondsString;
-        string minutesString = minutes.ToString();
-        if (minutes < 10)
-            minutesString = "0" + minutesString;
-        string hoursString = hours.ToString();
-        if (hours < 10)
-            hoursString = "0" + hoursString;
-
-        string timeString = hoursString + ":" + minutesString + ":" + secondsString + ":" + hundredthsString;
-        return timeString;
-    }
-
-   
-    //SETTINGS - MOVE TO SETTINGS.CS (?)
-    public void MusicMuteToggle()
-    {
-        if (music.mute == true)
-        {
-            music.mute = false;
-            PlayerPrefs.SetInt("Music", 1);
-        }
-        else if (music.mute == false)
-        {
-            music.mute = true;
-            PlayerPrefs.SetInt("Music", 0);
-        }
-    }
-
-    public void SoundFXToglle()
-    {
-        if (soundFX)
-        {
-            soundFX = false;
-            PlayerPrefs.SetInt("SoundFX", 0);
-        }   
-        else if (!soundFX)
-        {
-            soundFX = true;
-            PlayerPrefs.SetInt("SoundFX", 1);
-        }
-    }
-
-    public void ShowTimerToggle()
-    {
-        if (timerBox.activeSelf)
-        {
-            timerBox.SetActive(false);
-            PlayerPrefs.SetInt("ShowTimer", 0);
-        }
-        else if (!timerBox.activeSelf)
-        {
-            timerBox.SetActive(true);
-            PlayerPrefs.SetInt("ShowTimer", 1);
-        }
-    }
-
-    public void ShowMovesToggle()
-    {
-        if (movesBox.activeSelf)
-        {
-            movesBox.SetActive(false);
-            PlayerPrefs.SetInt("ShowMoves", 0);
-        }
-        else if (!movesBox.activeSelf)
-        {
-            movesBox.SetActive(true);
-            PlayerPrefs.SetInt("ShowMoves", 1);
-        }
-    }
-    //SETTINGS - MOVE TO SETTINGS.CS (?)
-
-    public void StartScreenStartButton()//turn timer back on after pause
-    {
-        if (elapsedTimeText.text != "")
-        {
-            startTimer = true;
-        }
-
-        startButtonPressedOnce = true;
-    }
-
-    public void ChangeTextOnStartButton()
-    {
-        if (startButtonPressedOnce)
-            startButtonOnStartPanel.buttonText = "Resume";
-    }
 }

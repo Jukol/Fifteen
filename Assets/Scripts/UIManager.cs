@@ -95,10 +95,12 @@ public class UIManager : MonoBehaviour
         if (_timerBox.activeSelf == true)
         {
             _timerBox.SetActive(false);
+            PlayerPrefs.SetInt("ShowTimer", 0);
         }
         else if (_timerBox.activeSelf == false)
         {
             _timerBox.SetActive(true);
+            PlayerPrefs.SetInt("ShowTimer", 1);
         }
     }
 
@@ -107,10 +109,26 @@ public class UIManager : MonoBehaviour
         if (_movesBox.activeSelf == true)
         {
             _movesBox.SetActive(false);
+            PlayerPrefs.SetInt("ShowMoves", 0);
         }
         else if (_movesBox.activeSelf == false)
         {
             _movesBox.SetActive(true);
+            PlayerPrefs.SetInt("ShowMoves", 1);
+        }
+    }
+
+    public void SoundFXToggle()
+    {
+        if (GameManager.Instance.SoundFX)
+        {
+            GameManager.Instance.SoundFX = false;
+            PlayerPrefs.SetInt("SoundFX", 0);
+        }
+        else if (!GameManager.Instance.SoundFX)
+        {
+            GameManager.Instance.SoundFX = true;
+            PlayerPrefs.SetInt("SoundFX", 1);
         }
     }
 
@@ -123,14 +141,14 @@ public class UIManager : MonoBehaviour
     public void ShowBestMovesPanel()
     {
         _bestMovesPanel.SetActive(true);
-        _bestMovesText.text = GameManager2.Instance.moves.ToString();
+        _bestMovesText.text = GameManager.Instance.moves.ToString();
     }
 
     public void ShowBestTimeAndMovesPanel()
     {
         _bestTimeAndMovesPanel.SetActive(true);
         _bestTimeForDoublePanelText.text = "Time: " + _timeSpan.ToString("hh':'mm':'ss':'ff");
-        _bestMovesForDoublePanelText.text = "Moves: " + GameManager2.Instance.moves.ToString();
+        _bestMovesForDoublePanelText.text = "Moves: " + GameManager.Instance.moves.ToString();
     }
 
     public void ShowGoodJobPanel()
