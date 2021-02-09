@@ -60,5 +60,8 @@ Assets/LuaFramework.meta
 Assets/XLua/Gen/*
 Assets/XLua/Gen.meta
 
+# 3rd Party Packages
+Assets/Modern/Modern UI Pack/*
+
 .DS_Store
 UnityMMO.code-workspace
